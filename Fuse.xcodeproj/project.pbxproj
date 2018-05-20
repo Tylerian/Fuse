@@ -1,0 +1,733 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		57477A2720B1943A007BC236 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57477A2820B1943D007BC236 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		57477A2920B1948F007BC236 /* CFuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786948620B1930A001F3DC6 /* CFuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57477A2A20B19546007BC236 /* CFuse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5786948420B1930A001F3DC6 /* CFuse.framework */; };
+		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */; };
+		5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */; };
+		5786946920B0F952001F3DC6 /* fs_byte_buffer+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786946820B0F952001F3DC6 /* fs_byte_buffer+extensions.swift */; };
+		5786948C20B19387001F3DC6 /* fs_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942920B02AE9001F3DC6 /* fs_error.c */; };
+		5786948D20B19387001F3DC6 /* fs_byte_buffer_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942220B01ED4001F3DC6 /* fs_byte_buffer_init.c */; };
+		5786948E20B19387001F3DC6 /* fs_byte_buffer_free.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */; };
+		5786948F20B19387001F3DC6 /* fs_byte_buffer_copy.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */; };
+		5786949020B19387001F3DC6 /* fs_byte_buffer_read_int8.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942D20B04DD4001F3DC6 /* fs_byte_buffer_read_int8.c */; };
+		5786949120B19387001F3DC6 /* fs_byte_buffer_read_int16.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943120B04E0D001F3DC6 /* fs_byte_buffer_read_int16.c */; };
+		5786949220B19387001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943320B04E20001F3DC6 /* fs_byte_buffer_read_int32.c */; };
+		5786949320B19387001F3DC6 /* fs_byte_buffer_read_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943620B04E30001F3DC6 /* fs_byte_buffer_read_int64.c */; };
+		5786949420B19387001F3DC6 /* fs_byte_buffer_read_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947A20B180FF001F3DC6 /* fs_byte_buffer_read_bytes.c */; };
+		5786949520B19387001F3DC6 /* fs_byte_buffer_write_int8.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942F20B04DE6001F3DC6 /* fs_byte_buffer_write_int8.c */; };
+		5786949620B19387001F3DC6 /* fs_byte_buffer_write_int16.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943920B04E4C001F3DC6 /* fs_byte_buffer_write_int16.c */; };
+		5786949720B19387001F3DC6 /* fs_byte_buffer_write_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */; };
+		5786949820B19387001F3DC6 /* fs_byte_buffer_write_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */; };
+		5786949920B19387001F3DC6 /* fs_byte_buffer_write_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */; };
+		5786949A20B19387001F3DC6 /* fs_byte_buffer_is_readable.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786945D20B06E21001F3DC6 /* fs_byte_buffer_is_readable.c */; };
+		5786949B20B19387001F3DC6 /* fs_byte_buffer_is_writable.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786945F20B06E3B001F3DC6 /* fs_byte_buffer_is_writable.c */; };
+		5786949C20B19398001F3DC6 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		5786949D20B1939E001F3DC6 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		578694AB20B19408001F3DC6 /* fs_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942920B02AE9001F3DC6 /* fs_error.c */; };
+		578694AC20B19408001F3DC6 /* fs_byte_buffer_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942220B01ED4001F3DC6 /* fs_byte_buffer_init.c */; };
+		578694AD20B19408001F3DC6 /* fs_byte_buffer_free.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */; };
+		578694AE20B19408001F3DC6 /* fs_byte_buffer_copy.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */; };
+		578694AF20B19408001F3DC6 /* fs_byte_buffer_read_int8.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942D20B04DD4001F3DC6 /* fs_byte_buffer_read_int8.c */; };
+		578694B020B19408001F3DC6 /* fs_byte_buffer_read_int16.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943120B04E0D001F3DC6 /* fs_byte_buffer_read_int16.c */; };
+		578694B120B19408001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943320B04E20001F3DC6 /* fs_byte_buffer_read_int32.c */; };
+		578694B220B19408001F3DC6 /* fs_byte_buffer_read_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943620B04E30001F3DC6 /* fs_byte_buffer_read_int64.c */; };
+		578694B320B19408001F3DC6 /* fs_byte_buffer_read_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947A20B180FF001F3DC6 /* fs_byte_buffer_read_bytes.c */; };
+		578694B420B19408001F3DC6 /* fs_byte_buffer_write_int8.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942F20B04DE6001F3DC6 /* fs_byte_buffer_write_int8.c */; };
+		578694B520B19408001F3DC6 /* fs_byte_buffer_write_int16.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943920B04E4C001F3DC6 /* fs_byte_buffer_write_int16.c */; };
+		578694B620B19408001F3DC6 /* fs_byte_buffer_write_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */; };
+		578694B720B19408001F3DC6 /* fs_byte_buffer_write_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */; };
+		578694B820B19408001F3DC6 /* fs_byte_buffer_write_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */; };
+		578694B920B19408001F3DC6 /* fs_byte_buffer_is_readable.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786945D20B06E21001F3DC6 /* fs_byte_buffer_is_readable.c */; };
+		578694BA20B19408001F3DC6 /* fs_byte_buffer_is_writable.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786945F20B06E3B001F3DC6 /* fs_byte_buffer_is_writable.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		57477A2B20B19553007BC236 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5786940820AF675E001F3DC6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5786948320B1930A001F3DC6;
+			remoteInfo = CFuse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		578694A020B193EE001F3DC6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
+		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuffer.swift; sourceTree = "<group>"; };
+		5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferEndianness.swift; sourceTree = "<group>"; };
+		5786942120B01ED4001F3DC6 /* fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fuse.h; sourceTree = "<group>"; };
+		5786942220B01ED4001F3DC6 /* fs_byte_buffer_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_init.c; sourceTree = "<group>"; };
+		5786942920B02AE9001F3DC6 /* fs_error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_error.c; sourceTree = "<group>"; };
+		5786942B20B04C39001F3DC6 /* fuse_private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fuse_private.h; sourceTree = "<group>"; };
+		5786942D20B04DD4001F3DC6 /* fs_byte_buffer_read_int8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_read_int8.c; sourceTree = "<group>"; };
+		5786942F20B04DE6001F3DC6 /* fs_byte_buffer_write_int8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_int8.c; sourceTree = "<group>"; };
+		5786943120B04E0D001F3DC6 /* fs_byte_buffer_read_int16.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_read_int16.c; sourceTree = "<group>"; };
+		5786943320B04E20001F3DC6 /* fs_byte_buffer_read_int32.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_read_int32.c; sourceTree = "<group>"; };
+		5786943620B04E30001F3DC6 /* fs_byte_buffer_read_int64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_read_int64.c; sourceTree = "<group>"; };
+		5786943920B04E4C001F3DC6 /* fs_byte_buffer_write_int16.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_int16.c; sourceTree = "<group>"; };
+		5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_int32.c; sourceTree = "<group>"; };
+		5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_int64.c; sourceTree = "<group>"; };
+		5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_free.c; sourceTree = "<group>"; };
+		5786945D20B06E21001F3DC6 /* fs_byte_buffer_is_readable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_is_readable.c; sourceTree = "<group>"; };
+		5786945F20B06E3B001F3DC6 /* fs_byte_buffer_is_writable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_is_writable.c; sourceTree = "<group>"; };
+		5786946820B0F952001F3DC6 /* fs_byte_buffer+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "fs_byte_buffer+extensions.swift"; sourceTree = "<group>"; };
+		5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_copy.c; sourceTree = "<group>"; };
+		5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_bytes.c; sourceTree = "<group>"; };
+		5786947A20B180FF001F3DC6 /* fs_byte_buffer_read_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_read_bytes.c; sourceTree = "<group>"; };
+		5786948420B1930A001F3DC6 /* CFuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CFuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5786948620B1930A001F3DC6 /* CFuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CFuse.h; sourceTree = "<group>"; };
+		5786948720B1930A001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		578694A220B193EE001F3DC6 /* libfuse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfuse.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5786940D20AF675E001F3DC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57477A2A20B19546007BC236 /* CFuse.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5786948020B1930A001F3DC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5786949F20B193EE001F3DC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5786940720AF675E001F3DC6 = {
+			isa = PBXGroup;
+			children = (
+				5786942620B02A51001F3DC6 /* C */,
+				5786942520B02A44001F3DC6 /* Swift */,
+				5786941220AF675E001F3DC6 /* Products */,
+				5786946620B0F8F9001F3DC6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5786941220AF675E001F3DC6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5786941120AF675E001F3DC6 /* Fuse.framework */,
+				5786948420B1930A001F3DC6 /* CFuse.framework */,
+				578694A220B193EE001F3DC6 /* libfuse.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5786941320AF675E001F3DC6 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5786941C20AF6768001F3DC6 /* Buffers */,
+				5786941420AF675E001F3DC6 /* Fuse.h */,
+				5786941520AF675E001F3DC6 /* Info.plist */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		5786941C20AF6768001F3DC6 /* Buffers */ = {
+			isa = PBXGroup;
+			children = (
+				5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */,
+				5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */,
+				5786946820B0F952001F3DC6 /* fs_byte_buffer+extensions.swift */,
+			);
+			path = Buffers;
+			sourceTree = "<group>";
+		};
+		5786942520B02A44001F3DC6 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				5786941320AF675E001F3DC6 /* Sources */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		5786942620B02A51001F3DC6 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				5786942820B02A65001F3DC6 /* Sources */,
+				5786948720B1930A001F3DC6 /* Info.plist */,
+				5786948620B1930A001F3DC6 /* CFuse.h */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		5786942820B02A65001F3DC6 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5786944020B05E80001F3DC6 /* headers */,
+				5786942920B02AE9001F3DC6 /* fs_error.c */,
+				5786942220B01ED4001F3DC6 /* fs_byte_buffer_init.c */,
+				5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */,
+				5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */,
+				5786942D20B04DD4001F3DC6 /* fs_byte_buffer_read_int8.c */,
+				5786943120B04E0D001F3DC6 /* fs_byte_buffer_read_int16.c */,
+				5786943320B04E20001F3DC6 /* fs_byte_buffer_read_int32.c */,
+				5786943620B04E30001F3DC6 /* fs_byte_buffer_read_int64.c */,
+				5786947A20B180FF001F3DC6 /* fs_byte_buffer_read_bytes.c */,
+				5786942F20B04DE6001F3DC6 /* fs_byte_buffer_write_int8.c */,
+				5786943920B04E4C001F3DC6 /* fs_byte_buffer_write_int16.c */,
+				5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */,
+				5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */,
+				5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */,
+				5786945D20B06E21001F3DC6 /* fs_byte_buffer_is_readable.c */,
+				5786945F20B06E3B001F3DC6 /* fs_byte_buffer_is_writable.c */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		5786944020B05E80001F3DC6 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				5786942120B01ED4001F3DC6 /* fuse.h */,
+				5786942B20B04C39001F3DC6 /* fuse_private.h */,
+			);
+			path = headers;
+			sourceTree = "<group>";
+		};
+		5786946620B0F8F9001F3DC6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		57477A2620B19433007BC236 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57477A2720B1943A007BC236 /* fuse.h in Headers */,
+				57477A2820B1943D007BC236 /* fuse_private.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5786940E20AF675E001F3DC6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5786941620AF675E001F3DC6 /* Fuse.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5786948120B1930A001F3DC6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57477A2920B1948F007BC236 /* CFuse.h in Headers */,
+				5786949D20B1939E001F3DC6 /* fuse.h in Headers */,
+				5786949C20B19398001F3DC6 /* fuse_private.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5786941020AF675E001F3DC6 /* Fuse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5786941920AF675E001F3DC6 /* Build configuration list for PBXNativeTarget "Fuse" */;
+			buildPhases = (
+				5786940C20AF675E001F3DC6 /* Sources */,
+				5786940D20AF675E001F3DC6 /* Frameworks */,
+				5786940E20AF675E001F3DC6 /* Headers */,
+				5786940F20AF675E001F3DC6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				57477A2C20B19553007BC236 /* PBXTargetDependency */,
+			);
+			name = Fuse;
+			productName = Fuse;
+			productReference = 5786941120AF675E001F3DC6 /* Fuse.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5786948320B1930A001F3DC6 /* CFuse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5786948920B1930A001F3DC6 /* Build configuration list for PBXNativeTarget "CFuse" */;
+			buildPhases = (
+				5786947F20B1930A001F3DC6 /* Sources */,
+				5786948020B1930A001F3DC6 /* Frameworks */,
+				5786948120B1930A001F3DC6 /* Headers */,
+				5786948220B1930A001F3DC6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CFuse;
+			productName = CFuseFramework;
+			productReference = 5786948420B1930A001F3DC6 /* CFuse.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		578694A120B193EE001F3DC6 /* fuse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 578694A820B193EF001F3DC6 /* Build configuration list for PBXNativeTarget "fuse" */;
+			buildPhases = (
+				57477A2620B19433007BC236 /* Headers */,
+				578694A020B193EE001F3DC6 /* CopyFiles */,
+				5786949E20B193EE001F3DC6 /* Sources */,
+				5786949F20B193EE001F3DC6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = fuse;
+			productName = fuse;
+			productReference = 578694A220B193EE001F3DC6 /* libfuse.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5786940820AF675E001F3DC6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = Tylerian;
+				TargetAttributes = {
+					5786941020AF675E001F3DC6 = {
+						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
+					};
+					5786948320B1930A001F3DC6 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					578694A120B193EE001F3DC6 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 5786940B20AF675E001F3DC6 /* Build configuration list for PBXProject "Fuse" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5786940720AF675E001F3DC6;
+			productRefGroup = 5786941220AF675E001F3DC6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				578694A120B193EE001F3DC6 /* fuse */,
+				5786941020AF675E001F3DC6 /* Fuse */,
+				5786948320B1930A001F3DC6 /* CFuse */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5786940F20AF675E001F3DC6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5786948220B1930A001F3DC6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5786940C20AF675E001F3DC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5786946920B0F952001F3DC6 /* fs_byte_buffer+extensions.swift in Sources */,
+				5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */,
+				5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5786947F20B1930A001F3DC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5786948C20B19387001F3DC6 /* fs_error.c in Sources */,
+				5786948D20B19387001F3DC6 /* fs_byte_buffer_init.c in Sources */,
+				5786948E20B19387001F3DC6 /* fs_byte_buffer_free.c in Sources */,
+				5786948F20B19387001F3DC6 /* fs_byte_buffer_copy.c in Sources */,
+				5786949020B19387001F3DC6 /* fs_byte_buffer_read_int8.c in Sources */,
+				5786949120B19387001F3DC6 /* fs_byte_buffer_read_int16.c in Sources */,
+				5786949220B19387001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */,
+				5786949320B19387001F3DC6 /* fs_byte_buffer_read_int64.c in Sources */,
+				5786949420B19387001F3DC6 /* fs_byte_buffer_read_bytes.c in Sources */,
+				5786949520B19387001F3DC6 /* fs_byte_buffer_write_int8.c in Sources */,
+				5786949620B19387001F3DC6 /* fs_byte_buffer_write_int16.c in Sources */,
+				5786949720B19387001F3DC6 /* fs_byte_buffer_write_int32.c in Sources */,
+				5786949820B19387001F3DC6 /* fs_byte_buffer_write_int64.c in Sources */,
+				5786949920B19387001F3DC6 /* fs_byte_buffer_write_bytes.c in Sources */,
+				5786949A20B19387001F3DC6 /* fs_byte_buffer_is_readable.c in Sources */,
+				5786949B20B19387001F3DC6 /* fs_byte_buffer_is_writable.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5786949E20B193EE001F3DC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				578694AB20B19408001F3DC6 /* fs_error.c in Sources */,
+				578694AC20B19408001F3DC6 /* fs_byte_buffer_init.c in Sources */,
+				578694AD20B19408001F3DC6 /* fs_byte_buffer_free.c in Sources */,
+				578694AE20B19408001F3DC6 /* fs_byte_buffer_copy.c in Sources */,
+				578694AF20B19408001F3DC6 /* fs_byte_buffer_read_int8.c in Sources */,
+				578694B020B19408001F3DC6 /* fs_byte_buffer_read_int16.c in Sources */,
+				578694B120B19408001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */,
+				578694B220B19408001F3DC6 /* fs_byte_buffer_read_int64.c in Sources */,
+				578694B320B19408001F3DC6 /* fs_byte_buffer_read_bytes.c in Sources */,
+				578694B420B19408001F3DC6 /* fs_byte_buffer_write_int8.c in Sources */,
+				578694B520B19408001F3DC6 /* fs_byte_buffer_write_int16.c in Sources */,
+				578694B620B19408001F3DC6 /* fs_byte_buffer_write_int32.c in Sources */,
+				578694B720B19408001F3DC6 /* fs_byte_buffer_write_int64.c in Sources */,
+				578694B820B19408001F3DC6 /* fs_byte_buffer_write_bytes.c in Sources */,
+				578694B920B19408001F3DC6 /* fs_byte_buffer_is_readable.c in Sources */,
+				578694BA20B19408001F3DC6 /* fs_byte_buffer_is_writable.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		57477A2C20B19553007BC236 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5786948320B1930A001F3DC6 /* CFuse */;
+			targetProxy = 57477A2B20B19553007BC236 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5786941720AF675E001F3DC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5786941820AF675E001F3DC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5786941A20AF675E001F3DC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Swift/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tylerian.Fuse;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5786941B20AF675E001F3DC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Swift/Sources/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tylerian.Fuse;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5786948A20B1930A001F3DC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/C/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tylerian.CFuse;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5786948B20B1930A001F3DC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/C/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tylerian.CFuse;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		578694A920B193EF001F3DC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		578694AA20B193EF001F3DC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5786940B20AF675E001F3DC6 /* Build configuration list for PBXProject "Fuse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5786941720AF675E001F3DC6 /* Debug */,
+				5786941820AF675E001F3DC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5786941920AF675E001F3DC6 /* Build configuration list for PBXNativeTarget "Fuse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5786941A20AF675E001F3DC6 /* Debug */,
+				5786941B20AF675E001F3DC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5786948920B1930A001F3DC6 /* Build configuration list for PBXNativeTarget "CFuse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5786948A20B1930A001F3DC6 /* Debug */,
+				5786948B20B1930A001F3DC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		578694A820B193EF001F3DC6 /* Build configuration list for PBXNativeTarget "fuse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				578694A920B193EF001F3DC6 /* Debug */,
+				578694AA20B193EF001F3DC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5786940820AF675E001F3DC6 /* Project object */;
+}
