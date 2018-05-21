@@ -6,18 +6,11 @@
 //  Copyright © 2018 Tylerian. All rights reserved.
 //
 
-#include <fuse_private.h>
+#include "fuse_private.h"
 
 int fs_byte_buffer_copy(fs_byte_buffer_t *a, fs_byte_buffer_t *b)
 {
-    if (b->heap != NULL)
-    {
-        fs_byte_buffer_free(b);
-    }
-    
-    fs_byte_buffer_init(b, a->capacity);
-    
-    memcpy(b->heap, a->heap, sizeof(a->heap));
+    // TODO
     
     return FS_OKAY;
 }

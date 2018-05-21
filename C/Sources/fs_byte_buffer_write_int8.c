@@ -6,7 +6,7 @@
 //  Copyright © 2018 Tylerian. All rights reserved.
 //
 
-#include <fuse_private.h>
+#include "fuse_private.h"
 
 int fs_byte_buffer_write_int8(fs_byte_buffer_t *buffer, int8_t value)
 {

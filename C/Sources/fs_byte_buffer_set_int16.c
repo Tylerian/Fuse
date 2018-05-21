@@ -8,7 +8,7 @@
 
 #include "fuse_private.h"
 
-int fs_byte_buffer_set_int_16_be(fs_byte_buffer_t *buffer, uint32_t offset, int16_t value)
+int fs_byte_buffer_set_int16_be(fs_byte_buffer_t *buffer, uint32_t offset, int16_t value)
 {
     if (fs_byte_buffer_is_writable_by_length_at_offset(buffer, sizeof(int16_t), offset) == FS_NO)
     {
@@ -21,7 +21,7 @@ int fs_byte_buffer_set_int_16_be(fs_byte_buffer_t *buffer, uint32_t offset, int1
     return FS_OKAY;
 }
 
-int fs_byte_buffer_set_int_16_le(fs_byte_buffer_t *buffer, uint32_t offset, int16_t value)
+int fs_byte_buffer_set_int16_le(fs_byte_buffer_t *buffer, uint32_t offset, int16_t value)
 {
     if (fs_byte_buffer_is_writable_by_length_at_offset(buffer, sizeof(int16_t), offset) == FS_NO)
     {

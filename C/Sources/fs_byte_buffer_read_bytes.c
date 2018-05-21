@@ -6,7 +6,7 @@
 //  Copyright © 2018 Tylerian. All rights reserved.
 //
 
-#include <fuse_private.h>
+#include "fuse_private.h"
 
 int fs_byte_buffer_read_bytes(fs_byte_buffer_t *buffer, uint32_t length, fs_byte_t *out)
 {

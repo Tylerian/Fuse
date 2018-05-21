@@ -1,4 +1,4 @@
-#include <fuse_private.h>
+#include "fuse_private.h"
 
 static const struct {
     int code;
