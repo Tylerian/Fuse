@@ -11,6 +11,16 @@
 		57477A2820B1943D007BC236 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		57477A2920B1948F007BC236 /* CFuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786948620B1930A001F3DC6 /* CFuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		57477A2A20B19546007BC236 /* CFuse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5786948420B1930A001F3DC6 /* CFuse.framework */; };
+		57477A2E20B2D69D007BC236 /* fs_byte_buffer_get_int8.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A2D20B2D69D007BC236 /* fs_byte_buffer_get_int8.c */; };
+		57477A3020B2D6B7007BC236 /* fs_byte_buffer_set_int8.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A2F20B2D6B7007BC236 /* fs_byte_buffer_set_int8.c */; };
+		57477A3220B2D8E3007BC236 /* fs_byte_buffer_get_int16.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3120B2D8E3007BC236 /* fs_byte_buffer_get_int16.c */; };
+		57477A3420B2D8F0007BC236 /* fs_byte_buffer_set_int16.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3320B2D8F0007BC236 /* fs_byte_buffer_set_int16.c */; };
+		57477A3620B2D8FD007BC236 /* fs_byte_buffer_get_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3520B2D8FD007BC236 /* fs_byte_buffer_get_int32.c */; };
+		57477A3820B2D90B007BC236 /* fs_byte_buffer_set_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3720B2D90B007BC236 /* fs_byte_buffer_set_int32.c */; };
+		57477A3A20B2D91C007BC236 /* fs_byte_buffer_get_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3920B2D91C007BC236 /* fs_byte_buffer_get_int64.c */; };
+		57477A3C20B2D92D007BC236 /* fs_byte_buffer_set_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3B20B2D92D007BC236 /* fs_byte_buffer_set_int64.c */; };
+		57477A3E20B2D942007BC236 /* fs_byte_buffer_get_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3D20B2D942007BC236 /* fs_byte_buffer_get_bytes.c */; };
+		57477A4020B2D952007BC236 /* fs_byte_buffer_set_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 57477A3F20B2D952007BC236 /* fs_byte_buffer_set_bytes.c */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */; };
 		5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */; };
@@ -74,6 +84,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		57477A2D20B2D69D007BC236 /* fs_byte_buffer_get_int8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_get_int8.c; sourceTree = "<group>"; };
+		57477A2F20B2D6B7007BC236 /* fs_byte_buffer_set_int8.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_int8.c; sourceTree = "<group>"; };
+		57477A3120B2D8E3007BC236 /* fs_byte_buffer_get_int16.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_get_int16.c; sourceTree = "<group>"; };
+		57477A3320B2D8F0007BC236 /* fs_byte_buffer_set_int16.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_int16.c; sourceTree = "<group>"; };
+		57477A3520B2D8FD007BC236 /* fs_byte_buffer_get_int32.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_get_int32.c; sourceTree = "<group>"; };
+		57477A3720B2D90B007BC236 /* fs_byte_buffer_set_int32.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_int32.c; sourceTree = "<group>"; };
+		57477A3920B2D91C007BC236 /* fs_byte_buffer_get_int64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_get_int64.c; sourceTree = "<group>"; };
+		57477A3B20B2D92D007BC236 /* fs_byte_buffer_set_int64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_int64.c; sourceTree = "<group>"; };
+		57477A3D20B2D942007BC236 /* fs_byte_buffer_get_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_get_bytes.c; sourceTree = "<group>"; };
+		57477A3F20B2D952007BC236 /* fs_byte_buffer_set_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_bytes.c; sourceTree = "<group>"; };
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -196,11 +216,21 @@
 				5786942220B01ED4001F3DC6 /* fs_byte_buffer_init.c */,
 				5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */,
 				5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */,
+				57477A2D20B2D69D007BC236 /* fs_byte_buffer_get_int8.c */,
+				57477A3120B2D8E3007BC236 /* fs_byte_buffer_get_int16.c */,
+				57477A3520B2D8FD007BC236 /* fs_byte_buffer_get_int32.c */,
+				57477A3920B2D91C007BC236 /* fs_byte_buffer_get_int64.c */,
+				57477A3D20B2D942007BC236 /* fs_byte_buffer_get_bytes.c */,
 				5786942D20B04DD4001F3DC6 /* fs_byte_buffer_read_int8.c */,
 				5786943120B04E0D001F3DC6 /* fs_byte_buffer_read_int16.c */,
 				5786943320B04E20001F3DC6 /* fs_byte_buffer_read_int32.c */,
 				5786943620B04E30001F3DC6 /* fs_byte_buffer_read_int64.c */,
 				5786947A20B180FF001F3DC6 /* fs_byte_buffer_read_bytes.c */,
+				57477A2F20B2D6B7007BC236 /* fs_byte_buffer_set_int8.c */,
+				57477A3320B2D8F0007BC236 /* fs_byte_buffer_set_int16.c */,
+				57477A3720B2D90B007BC236 /* fs_byte_buffer_set_int32.c */,
+				57477A3B20B2D92D007BC236 /* fs_byte_buffer_set_int64.c */,
+				57477A3F20B2D952007BC236 /* fs_byte_buffer_set_bytes.c */,
 				5786942F20B04DE6001F3DC6 /* fs_byte_buffer_write_int8.c */,
 				5786943920B04E4C001F3DC6 /* fs_byte_buffer_write_int16.c */,
 				5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */,
@@ -412,18 +442,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				578694AB20B19408001F3DC6 /* fs_error.c in Sources */,
+				57477A3220B2D8E3007BC236 /* fs_byte_buffer_get_int16.c in Sources */,
+				57477A3820B2D90B007BC236 /* fs_byte_buffer_set_int32.c in Sources */,
 				578694AC20B19408001F3DC6 /* fs_byte_buffer_init.c in Sources */,
 				578694AD20B19408001F3DC6 /* fs_byte_buffer_free.c in Sources */,
+				57477A3420B2D8F0007BC236 /* fs_byte_buffer_set_int16.c in Sources */,
 				578694AE20B19408001F3DC6 /* fs_byte_buffer_copy.c in Sources */,
+				57477A3C20B2D92D007BC236 /* fs_byte_buffer_set_int64.c in Sources */,
+				57477A2E20B2D69D007BC236 /* fs_byte_buffer_get_int8.c in Sources */,
+				57477A3620B2D8FD007BC236 /* fs_byte_buffer_get_int32.c in Sources */,
 				578694AF20B19408001F3DC6 /* fs_byte_buffer_read_int8.c in Sources */,
 				578694B020B19408001F3DC6 /* fs_byte_buffer_read_int16.c in Sources */,
 				578694B120B19408001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */,
+				57477A3A20B2D91C007BC236 /* fs_byte_buffer_get_int64.c in Sources */,
+				57477A3020B2D6B7007BC236 /* fs_byte_buffer_set_int8.c in Sources */,
 				578694B220B19408001F3DC6 /* fs_byte_buffer_read_int64.c in Sources */,
 				578694B320B19408001F3DC6 /* fs_byte_buffer_read_bytes.c in Sources */,
 				578694B420B19408001F3DC6 /* fs_byte_buffer_write_int8.c in Sources */,
 				578694B520B19408001F3DC6 /* fs_byte_buffer_write_int16.c in Sources */,
 				578694B620B19408001F3DC6 /* fs_byte_buffer_write_int32.c in Sources */,
 				578694B720B19408001F3DC6 /* fs_byte_buffer_write_int64.c in Sources */,
+				57477A4020B2D952007BC236 /* fs_byte_buffer_set_bytes.c in Sources */,
+				57477A3E20B2D942007BC236 /* fs_byte_buffer_get_bytes.c in Sources */,
 				578694B820B19408001F3DC6 /* fs_byte_buffer_write_bytes.c in Sources */,
 				578694B920B19408001F3DC6 /* fs_byte_buffer_is_readable.c in Sources */,
 				578694BA20B19408001F3DC6 /* fs_byte_buffer_is_writable.c in Sources */,

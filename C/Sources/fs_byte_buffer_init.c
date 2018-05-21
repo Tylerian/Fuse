@@ -8,7 +8,7 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_init(fs_byte_buffer* buffer, uint32_t capacity)
+int fs_byte_buffer_init(fs_byte_buffer_t* buffer, uint32_t capacity)
 {
     /* allocate memory */
     buffer->heap = OPT_CAST(fs_byte) malloc(capacity);
@@ -19,10 +19,13 @@ int fs_byte_buffer_init(fs_byte_buffer* buffer, uint32_t capacity)
     }
     
     /* clear allocated memory */
+    /* since we'll write data on it,
+     * we don't care about memset(0)
+     * let's save some memory bandwidth
     for (int i = 0; i < capacity; i++)
     {
         buffer->heap[i] = 0;
-    }
+    }*/
     
     /* Set marks to zero */
     buffer->reader_mark = 0;

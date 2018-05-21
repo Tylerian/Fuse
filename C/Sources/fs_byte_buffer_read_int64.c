@@ -8,22 +8,34 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_read_int64(fs_byte_buffer *buffer, int64_t *out)
+int fs_byte_buffer_read_int64_be(fs_byte_buffer_t *buffer, int64_t *out)
 {
-    if (fs_byte_buffer_is_readable_by(buffer, sizeof(int64_t)) == FS_NO)
+    /* get current reader pos */
+    int offset = buffer->reader_index;
+    
+    int result = fs_byte_buffer_get_int64_be(buffer, offset, out);
+    
+    if (result == FS_OKAY)
     {
-        return FS_ERR_OOB;
+        /* increase reader pos by 8 */
+        buffer->reader_index += sizeof(int64_t);
     }
     
-    *out = (int64_t) (
-         (int64_t) (buffer->heap[buffer->reader_index++]) << 56 |
-         (int64_t) (buffer->heap[buffer->reader_index++]) << 48 |
-         (int64_t) (buffer->heap[buffer->reader_index++]) << 40 |
-         (int64_t) (buffer->heap[buffer->reader_index++]) << 32 |
-         (int64_t) (buffer->heap[buffer->reader_index++]) << 24 |
-         (int64_t) (buffer->heap[buffer->reader_index++]) << 16 |
-         (int64_t) (buffer->heap[buffer->reader_index++]) <<  8 |
-         (int64_t) (buffer->heap[buffer->reader_index++]));
+    return result;
+}
+
+int fs_byte_buffer_read_int64_le(fs_byte_buffer_t *buffer, int64_t *out)
+{
+    /* get current reader pos */
+    int offset = buffer->reader_index;
     
-    return FS_OKAY;
+    int result = fs_byte_buffer_get_int64_le(buffer, offset, out);
+    
+    if (result == FS_OKAY)
+    {
+        /* increase reader pos by 8 */
+        buffer->reader_index += sizeof(int64_t);
+    }
+    
+    return result;
 }

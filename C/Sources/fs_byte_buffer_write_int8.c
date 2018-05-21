@@ -8,14 +8,18 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_write_int8(fs_byte_buffer *buffer, int8_t value)
+int fs_byte_buffer_write_int8(fs_byte_buffer_t *buffer, int8_t value)
 {
-    if (fs_byte_buffer_is_writable_by(buffer, sizeof(int8_t)) == FS_NO)
+    /* get current writer pos */
+    int offset = buffer->writer_index;
+    
+    int result = fs_byte_buffer_set_int8(buffer, offset, value);
+    
+    if (result == FS_OKAY)
     {
-        return FS_ERR_OOB;
+        /* increase reader pos by 1 */
+        buffer->writer_index += sizeof(int8_t);
     }
     
-    buffer->heap[buffer->writer_index++] = (uint8_t) value;
-    
-    return FS_OKAY;
+    return result;
 }

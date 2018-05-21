@@ -8,15 +8,18 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_read_int8(fs_byte_buffer *buffer, int8_t *out)
+int fs_byte_buffer_read_int8(fs_byte_buffer_t *buffer, int8_t *out)
 {
-    if (fs_byte_buffer_is_readable_by(buffer, sizeof(int8_t)) == FS_NO)
+    /* get current reader pos */
+    int offset = buffer->reader_index;
+    
+    int result = fs_byte_buffer_get_int8(buffer, offset, out);
+    
+    if (result == FS_OKAY)
     {
-        return FS_ERR_OOB;
+        /* increase reader pos by 1 */
+        buffer->reader_index += sizeof(int8_t);
     }
     
-    *out = (int8_t) (
-        buffer->heap[buffer->reader_index++]);
-    
-    return FS_OKAY;
+    return result;
 }

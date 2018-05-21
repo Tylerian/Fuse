@@ -8,17 +8,19 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_free(fs_byte_buffer* buffer)
+int fs_byte_buffer_free(fs_byte_buffer_t* buffer)
 {
     /* only do anything if heap
      * hasn't been previously freed */
     if (buffer->heap != NULL)
     {
         /* First clear the memory */
+        /* don't memset(0), save some
+         * memory bw. and CPU cycles!
         for (int i = 0; i < buffer->writer_index; i++)
         {
             buffer->heap[i] = 0;
-        }
+        } */
         
         /* Free the memory */
         free(buffer->heap);

@@ -8,7 +8,7 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_copy(fs_byte_buffer *a, fs_byte_buffer *b)
+int fs_byte_buffer_copy(fs_byte_buffer_t *a, fs_byte_buffer_t *b)
 {
     if (b->heap != NULL)
     {

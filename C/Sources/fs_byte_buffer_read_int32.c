@@ -8,18 +8,34 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_read_int32(fs_byte_buffer *buffer, int32_t *out)
+int fs_byte_buffer_read_int32_be(fs_byte_buffer_t *buffer, int32_t *out)
 {
-    if (fs_byte_buffer_is_readable_by(buffer, sizeof(int32_t)) == FS_NO)
+    /* get current reader pos */
+    int offset = buffer->reader_index;
+    
+    int result = fs_byte_buffer_get_int32_be(buffer, offset, out);
+    
+    if (result == FS_OKAY)
     {
-        return FS_ERR_OOB;
+        /* increase reader pos by 4 */
+        buffer->reader_index += sizeof(int32_t);
     }
     
-    *out = (int32_t) (
-         (int32_t) (buffer->heap[buffer->reader_index++]) << 24 |
-         (int32_t) (buffer->heap[buffer->reader_index++]) << 16 |
-         (int32_t) (buffer->heap[buffer->reader_index++]) <<  8 |
-         (int32_t) (buffer->heap[buffer->reader_index++]));
+    return result;
+}
+
+int fs_byte_buffer_read_int32_le(fs_byte_buffer_t *buffer, int32_t *out)
+{
+    /* get current reader pos */
+    int offset = buffer->reader_index;
     
-    return FS_OKAY;
+    int result = fs_byte_buffer_get_int32_le(buffer, offset, out);
+    
+    if (result == FS_OKAY)
+    {
+        /* increase reader pos by 4 */
+        buffer->reader_index += sizeof(int32_t);
+    }
+    
+    return result;
 }

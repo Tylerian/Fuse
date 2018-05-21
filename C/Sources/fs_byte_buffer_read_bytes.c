@@ -8,32 +8,18 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_read_bytes(fs_byte_buffer *buffer, fs_byte *out, uint32_t length)
+int fs_byte_buffer_read_bytes(fs_byte_buffer_t *buffer, uint32_t length, fs_byte_t *out)
 {
-    /* calculate output size */
-    int out_length = sizeof(out) / sizeof(fs_byte);
+    /* get current reader pos */
+    int offset = buffer->reader_index;
     
-    /* it can't be less than
-     * requested read length */
-    if (out_length < length)
+    int result = fs_byte_buffer_get_bytes(buffer, offset, length, out);
+    
+    if (result == FS_OKAY)
     {
-        return FS_ERR_OOB;
+        /* increase reader pos by length */
+        buffer->reader_index += length;
     }
     
-    /* src must be readable */
-    int is_readable = fs_byte_buffer_is_readable_by(buffer, length);
-    
-    if (is_readable == FS_NO)
-    {
-        return FS_ERR_OOB;
-    }
-    
-    /* copy src into dst
-     * by reader_index */
-    memcpy(out, buffer->heap + buffer->reader_index, length);
-    
-    /* increase reader_index */
-    buffer->reader_index += length;
-    
-    return FS_OKAY;
+    return result;
 }

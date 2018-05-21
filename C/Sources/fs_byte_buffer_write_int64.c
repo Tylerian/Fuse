@@ -8,21 +8,34 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_write_int64(fs_byte_buffer *buffer, int64_t value)
+int fs_byte_buffer_write_int64_be(fs_byte_buffer_t *buffer, int64_t value)
 {
-    if (fs_byte_buffer_is_writable_by(buffer, sizeof(int64_t)) == FS_NO)
+    /* get current writer pos */
+    int offset = buffer->writer_index;
+    
+    int result = fs_byte_buffer_set_int64_be(buffer, offset, value);
+    
+    if (result == FS_OKAY)
     {
-        return FS_ERR_OOB;
+        /* increase reader pos by 8 */
+        buffer->writer_index += sizeof(int64_t);
     }
     
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value >> 56);
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value >> 48);
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value >> 40);
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value >> 32);
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value >> 24);
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value >> 16);
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value >>  8);
-    buffer->heap[buffer->writer_index++] = (uint8_t) (value);
+    return result;
+}
+
+int fs_byte_buffer_write_int64_le(fs_byte_buffer_t *buffer, int64_t value)
+{
+    /* get current writer pos */
+    int offset = buffer->writer_index;
     
-    return FS_OKAY;
+    int result = fs_byte_buffer_set_int64_le(buffer, offset, value);
+    
+    if (result == FS_OKAY)
+    {
+        /* increase reader pos by 8 */
+        buffer->writer_index += sizeof(int64_t);
+    }
+    
+    return result;
 }

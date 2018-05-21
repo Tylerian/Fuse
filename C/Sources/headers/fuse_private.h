@@ -21,10 +21,6 @@ extern "C" {
 #define OPT_CAST(x)
 #endif
 
-/* --> Boundary functions <-- */
-int fs_byte_buffer_is_readable_by(fs_byte_buffer* buffer, int length);
-int fs_byte_buffer_is_writable_by(fs_byte_buffer* buffer, int length);
-
 #ifdef __cplusplus
 }
 #endif

@@ -8,16 +8,34 @@
 
 #include <fuse_private.h>
 
-int fs_byte_buffer_read_int16(fs_byte_buffer *buffer, int16_t *out)
+int fs_byte_buffer_read_int16_be(fs_byte_buffer_t *buffer, int16_t *out)
 {
-    if (fs_byte_buffer_is_readable_by(buffer, sizeof(int16_t)) == FS_NO)
+    /* get current reader pos */
+    int offset = buffer->reader_index;
+    
+    int result = fs_byte_buffer_get_int16_be(buffer, offset, out);
+    
+    if (result == FS_OKAY)
     {
-        return FS_ERR_OOB;
+        /* increase reader pos by 2 */
+        buffer->reader_index += sizeof(int16_t);
     }
     
-    *out = (int16_t) (
-         (int16_t) (buffer->heap[buffer->reader_index++]) << 8 |
-         (int16_t) (buffer->heap[buffer->reader_index++]));
+    return result;
+}
+
+int fs_byte_buffer_read_int16_le(fs_byte_buffer_t *buffer, int16_t *out)
+{
+    /* get current reader pos */
+    int offset = buffer->reader_index;
     
-    return FS_OKAY;
+    int result = fs_byte_buffer_get_int16_le(buffer, offset, out);
+    
+    if (result == FS_OKAY)
+    {
+        /* increase reader pos by 2 */
+        buffer->reader_index += sizeof(int16_t);
+    }
+    
+    return result;
 }
