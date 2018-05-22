@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+public protocol ChannelPipeline {
+    var channel: Channel
+    
+    func write(object: AnyObject)
+}

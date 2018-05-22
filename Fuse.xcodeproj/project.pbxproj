@@ -47,10 +47,15 @@
 		57477A6220B30061007BC236 /* fs_byte_buffer_write_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */; };
 		57477A6320B30061007BC236 /* fs_byte_buffer_write_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */; };
 		57477A6420B30061007BC236 /* fs_byte_buffer_write_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */; };
+		57477A6820B30874007BC236 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6720B30874007BC236 /* Channel.swift */; };
+		57477A6A20B3091E007BC236 /* ChannelPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6920B3091E007BC236 /* ChannelPipeline.swift */; };
+		57477A6D20B339FA007BC236 /* ChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6C20B339F9007BC236 /* ChannelHandler.swift */; };
+		57477A7020B33A18007BC236 /* ChannelHandlerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */; };
+		57477A7220B438B2007BC236 /* ByteBufferError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A7120B438B2007BC236 /* ByteBufferError.swift */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */; };
 		5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */; };
-		5786946920B0F952001F3DC6 /* fs_byte_buffer+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786946820B0F952001F3DC6 /* fs_byte_buffer+extensions.swift */; };
+		5786946920B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */; };
 		5786949C20B19398001F3DC6 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5786949D20B1939E001F3DC6 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		578694AB20B19408001F3DC6 /* fs_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942920B02AE9001F3DC6 /* fs_error.c */; };
@@ -104,6 +109,11 @@
 		57477A3B20B2D92D007BC236 /* fs_byte_buffer_set_int64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_int64.c; sourceTree = "<group>"; };
 		57477A3D20B2D942007BC236 /* fs_byte_buffer_get_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_get_bytes.c; sourceTree = "<group>"; };
 		57477A3F20B2D952007BC236 /* fs_byte_buffer_set_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_bytes.c; sourceTree = "<group>"; };
+		57477A6720B30874007BC236 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		57477A6920B3091E007BC236 /* ChannelPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPipeline.swift; sourceTree = "<group>"; };
+		57477A6C20B339F9007BC236 /* ChannelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandler.swift; sourceTree = "<group>"; };
+		57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerContext.swift; sourceTree = "<group>"; };
+		57477A7120B438B2007BC236 /* ByteBufferError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferError.swift; sourceTree = "<group>"; };
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,7 +134,7 @@
 		5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_free.c; sourceTree = "<group>"; };
 		5786945D20B06E21001F3DC6 /* fs_byte_buffer_is_readable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_is_readable.c; sourceTree = "<group>"; };
 		5786945F20B06E3B001F3DC6 /* fs_byte_buffer_is_writable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_is_writable.c; sourceTree = "<group>"; };
-		5786946820B0F952001F3DC6 /* fs_byte_buffer+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "fs_byte_buffer+extensions.swift"; sourceTree = "<group>"; };
+		5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "fs_byte_buffer_t+extensions.swift"; sourceTree = "<group>"; };
 		5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_copy.c; sourceTree = "<group>"; };
 		5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_bytes.c; sourceTree = "<group>"; };
 		5786947A20B180FF001F3DC6 /* fs_byte_buffer_read_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_read_bytes.c; sourceTree = "<group>"; };
@@ -160,6 +170,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57477A6520B30847007BC236 /* Channels */ = {
+			isa = PBXGroup;
+			children = (
+				57477A6B20B339E7007BC236 /* Handlers */,
+				57477A6720B30874007BC236 /* Channel.swift */,
+				57477A6920B3091E007BC236 /* ChannelPipeline.swift */,
+			);
+			path = Channels;
+			sourceTree = "<group>";
+		};
+		57477A6B20B339E7007BC236 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				57477A6C20B339F9007BC236 /* ChannelHandler.swift */,
+				57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
 		5786940720AF675E001F3DC6 = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				5786941C20AF6768001F3DC6 /* Buffers */,
+				57477A6520B30847007BC236 /* Channels */,
 				5786941420AF675E001F3DC6 /* Fuse.h */,
 				5786941520AF675E001F3DC6 /* Info.plist */,
 			);
@@ -194,8 +224,9 @@
 			isa = PBXGroup;
 			children = (
 				5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */,
+				57477A7120B438B2007BC236 /* ByteBufferError.swift */,
 				5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */,
-				5786946820B0F952001F3DC6 /* fs_byte_buffer+extensions.swift */,
+				5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */,
 			);
 			path = Buffers;
 			sourceTree = "<group>";
@@ -374,6 +405,7 @@
 					};
 					578694A120B193EE001F3DC6 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 					};
 				};
 			};
@@ -418,9 +450,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5786946920B0F952001F3DC6 /* fs_byte_buffer+extensions.swift in Sources */,
 				5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */,
 				5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */,
+				5786946920B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,16 +495,20 @@
 			files = (
 				578694AB20B19408001F3DC6 /* fs_error.c in Sources */,
 				57477A3220B2D8E3007BC236 /* fs_byte_buffer_get_int16.c in Sources */,
+				57477A7020B33A18007BC236 /* ChannelHandlerContext.swift in Sources */,
 				57477A3820B2D90B007BC236 /* fs_byte_buffer_set_int32.c in Sources */,
+				57477A6A20B3091E007BC236 /* ChannelPipeline.swift in Sources */,
 				578694AC20B19408001F3DC6 /* fs_byte_buffer_init.c in Sources */,
 				578694AD20B19408001F3DC6 /* fs_byte_buffer_free.c in Sources */,
 				57477A3420B2D8F0007BC236 /* fs_byte_buffer_set_int16.c in Sources */,
 				578694AE20B19408001F3DC6 /* fs_byte_buffer_copy.c in Sources */,
+				57477A6820B30874007BC236 /* Channel.swift in Sources */,
 				57477A3C20B2D92D007BC236 /* fs_byte_buffer_set_int64.c in Sources */,
 				57477A2E20B2D69D007BC236 /* fs_byte_buffer_get_int8.c in Sources */,
 				57477A3620B2D8FD007BC236 /* fs_byte_buffer_get_int32.c in Sources */,
 				578694AF20B19408001F3DC6 /* fs_byte_buffer_read_int8.c in Sources */,
 				578694B020B19408001F3DC6 /* fs_byte_buffer_read_int16.c in Sources */,
+				57477A6D20B339FA007BC236 /* ChannelHandler.swift in Sources */,
 				578694B120B19408001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */,
 				57477A3A20B2D91C007BC236 /* fs_byte_buffer_get_int64.c in Sources */,
 				57477A3020B2D6B7007BC236 /* fs_byte_buffer_set_int8.c in Sources */,
@@ -484,6 +520,7 @@
 				578694B720B19408001F3DC6 /* fs_byte_buffer_write_int64.c in Sources */,
 				57477A4020B2D952007BC236 /* fs_byte_buffer_set_bytes.c in Sources */,
 				57477A3E20B2D942007BC236 /* fs_byte_buffer_get_bytes.c in Sources */,
+				57477A7220B438B2007BC236 /* ByteBufferError.swift in Sources */,
 				578694B820B19408001F3DC6 /* fs_byte_buffer_write_bytes.c in Sources */,
 				578694B920B19408001F3DC6 /* fs_byte_buffer_is_readable.c in Sources */,
 				578694BA20B19408001F3DC6 /* fs_byte_buffer_is_writable.c in Sources */,
@@ -727,11 +764,21 @@
 		578694A920B193EF001F3DC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -739,11 +786,20 @@
 		578694AA20B193EF001F3DC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

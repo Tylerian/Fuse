@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+public enum ByteBufferError: Error {
+    case limitReached
+    case readError
+    case writeError
+}
+
+extension ByteBufferError {
+    var debugDescription: String {
+        switch self {
+        case .limitReached:
+            return "";
+        case .readError:
+            return "";
+        case .writeError:
+            return "";
+        }
+    }
+}

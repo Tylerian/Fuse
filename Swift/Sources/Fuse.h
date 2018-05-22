@@ -13,5 +13,3 @@ FOUNDATION_EXPORT double FuseVersionNumber;
 
 //! Project version string for Fuse.
 FOUNDATION_EXPORT const unsigned char FuseVersionString[];
-
-#import <fuse.h>

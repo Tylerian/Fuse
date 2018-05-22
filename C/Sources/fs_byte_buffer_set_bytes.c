@@ -8,7 +8,7 @@
 
 #include "fuse_private.h"
 
-int fs_byte_buffer_set_bytes(fs_byte_buffer_t *buffer, uint32_t offset, fs_byte_t *in)
+int fs_byte_buffer_set_bytes(fs_byte_buffer_t *buffer, uint32_t offset, const fs_byte_t *in)
 {
     /* calculate input size */
     int length = sizeof(in) / sizeof(fs_byte_t);

@@ -8,7 +8,7 @@
 
 #include "fuse_private.h"
 
-int fs_byte_buffer_write_bytes(fs_byte_buffer_t *buffer, fs_byte_t *in)
+int fs_byte_buffer_write_bytes(fs_byte_buffer_t *buffer, const fs_byte_t *in)
 {
     /* get current writer pos */
     int offset = buffer->writer_index;

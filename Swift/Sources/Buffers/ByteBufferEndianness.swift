@@ -12,12 +12,16 @@ public enum ByteBufferEndianness {
     case bigEndian
     case littleEndian
     
-    public func transform<T: Numeric>(_ slice: Array<T>) -> Array<T> {
+    public func transform<T: Numeric>(_ slice: inout Array<T>) -> Array<T> {
         switch (self) {
         case .bigEndian:
-            return slice.reversed()
-        default:
-            return slice
+            slice.reverse()
+            break
+        case.littleEndian:
+            // NOOP since iOS/OSX is le
+            break
         }
+        
+        return slice
     }
 }

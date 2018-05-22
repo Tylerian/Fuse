@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "578694A120B193EE001F3DC6"
-               BuildableName = "libfuse.a"
-               BlueprintName = "fuse"
+               BlueprintIdentifier = "5786941020AF675E001F3DC6"
+               BuildableName = "Fuse.framework"
+               BlueprintName = "Fuse"
                ReferencedContainer = "container:Fuse.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "578694A120B193EE001F3DC6"
-            BuildableName = "libfuse.a"
-            BlueprintName = "fuse"
+            BlueprintIdentifier = "5786941020AF675E001F3DC6"
+            BuildableName = "Fuse.framework"
+            BlueprintName = "Fuse"
             ReferencedContainer = "container:Fuse.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "578694A120B193EE001F3DC6"
-            BuildableName = "libfuse.a"
-            BlueprintName = "fuse"
+            BlueprintIdentifier = "5786941020AF675E001F3DC6"
+            BuildableName = "Fuse.framework"
+            BlueprintName = "Fuse"
             ReferencedContainer = "container:Fuse.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
