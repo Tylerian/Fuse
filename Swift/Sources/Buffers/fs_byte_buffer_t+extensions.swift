@@ -8,8 +8,8 @@
 
 import CFuse
 
-extension fs_byte_buffer {
+extension fs_byte_buffer_t {
     internal init() {
-        self = fs_byte_buffer(heap: nil, capacity: 0, reader_mark: 0, writer_mark: 0, reader_index: 0, writer_index: 0)
+        self = fs_byte_buffer_t(heap: nil, capacity: 0, reader_mark: 0, writer_mark: 0, reader_index: 0, writer_index: 0)
     }
 }
