@@ -3,14 +3,18 @@ import Foundation
 public protocol Channel {
     var pipeline: ChannelPipeline { get }
     
+    func close()
     func connect(to host: String, port: Int)
     
-    func write(_ object: AnyObject)
+    func flush()
+    
+    func write(_ message: AnyObject)
+    func write(flushing message: AnyObject)
 }
 
 public protocol ChannelDelegate {
+    func channel(closed channel: Channel)
     func channel(connected channel: Channel)
-    func channel(disconnected channel: Channel)
 }
 
 public final class StreamChannel: Channel {

@@ -52,6 +52,7 @@
 		57477A6D20B339FA007BC236 /* ChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6C20B339F9007BC236 /* ChannelHandler.swift */; };
 		57477A7020B33A18007BC236 /* ChannelHandlerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */; };
 		57477A7220B438B2007BC236 /* ByteBufferError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A7120B438B2007BC236 /* ByteBufferError.swift */; };
+		57867BF520B47C700004456A /* ChannelStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF420B47C700004456A /* ChannelStream.swift */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */; };
 		5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */; };
@@ -114,6 +115,7 @@
 		57477A6C20B339F9007BC236 /* ChannelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandler.swift; sourceTree = "<group>"; };
 		57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerContext.swift; sourceTree = "<group>"; };
 		57477A7120B438B2007BC236 /* ByteBufferError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferError.swift; sourceTree = "<group>"; };
+		57867BF420B47C700004456A /* ChannelStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelStream.swift; sourceTree = "<group>"; };
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			children = (
 				57477A6B20B339E7007BC236 /* Handlers */,
 				57477A6720B30874007BC236 /* Channel.swift */,
+				57867BF420B47C700004456A /* ChannelStream.swift */,
 				57477A6920B3091E007BC236 /* ChannelPipeline.swift */,
 			);
 			path = Channels;
@@ -355,10 +358,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5786948920B1930A001F3DC6 /* Build configuration list for PBXNativeTarget "CFuse" */;
 			buildPhases = (
-				5786947F20B1930A001F3DC6 /* Sources */,
-				5786948020B1930A001F3DC6 /* Frameworks */,
 				5786948120B1930A001F3DC6 /* Headers */,
+				5786947F20B1930A001F3DC6 /* Sources */,
 				5786948220B1930A001F3DC6 /* Resources */,
+				5786948020B1930A001F3DC6 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -512,6 +515,7 @@
 				578694B120B19408001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */,
 				57477A3A20B2D91C007BC236 /* fs_byte_buffer_get_int64.c in Sources */,
 				57477A3020B2D6B7007BC236 /* fs_byte_buffer_set_int8.c in Sources */,
+				57867BF520B47C700004456A /* ChannelStream.swift in Sources */,
 				578694B220B19408001F3DC6 /* fs_byte_buffer_read_int64.c in Sources */,
 				578694B320B19408001F3DC6 /* fs_byte_buffer_read_bytes.c in Sources */,
 				578694B420B19408001F3DC6 /* fs_byte_buffer_write_int8.c in Sources */,
