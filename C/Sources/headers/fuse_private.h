@@ -21,6 +21,10 @@ extern "C" {
 #define OPT_CAST(x)
 #endif
 
+/* fs_byte_buffer_t constants */
+#define BUFFER_CAPACITY_DEFAULT   256
+#define BUFFER_CAPACITY_THRESHOLD 1024 * 1024 * 4 // 4 MiB page
+    
 #ifdef __cplusplus
 }
 #endif

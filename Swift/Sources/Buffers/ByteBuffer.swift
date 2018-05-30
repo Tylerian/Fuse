@@ -3,7 +3,13 @@ import CFuse
 
 public protocol ByteBuffer:
     ByteBufferReadable,
-    ByteBufferWritable { }
+    ByteBufferWritable {
+    
+    init(capacity: Int)
+    
+    func copy() -> ByteBuffer
+    func copy(to buffer: ByteBuffer)
+}
 
 public protocol ByteBufferReadable {
     var readerIndex: Int { get }

@@ -55,20 +55,23 @@ extension ChannelStream: StreamDelegate {
         print("stream(_ stream: \(stream), handle event: \(event)")
         
         switch (stream, event) {
-        case (self.input, .openCompleted):
-            self.delegate?.stream(opened: self)
-            break
-        case (self.input, .errorOccurred):
+        case (_, .errorOccurred):
             if let error = stream.streamError {
                 self.delegate?.stream(self, hasCaughtError: error)
             }
+            break
+        case (self.input, .openCompleted):
+            self.delegate?.stream(opened: self)
             break
         case (self.input, .endEncountered):
             self.delegate?.stream(closed: self)
             break
         case (self.input, .hasBytesAvailable):
             let available = self.input.read(&self.buffer, maxLength: kDefaultBufferSize)
-            self.delegate?.stream(self, hasBytesAvailable: self.buffer[0 ..< available])
+            self.delegate?.stream(self, hasBytesAvailable: &self.buffer[0 ..< available])
+            break
+        case (self.output, .hasSpaceAvailable):
+            self.delegate?.stream(self, hasSpaceAvailable: true)
             break
         default:
             break
@@ -81,6 +84,6 @@ internal protocol ChannelStreamDelegate: class {
     func stream(closed stream: ChannelStream)
     
     func stream(_ stream: ChannelStream, hasCaughtError error: Error)
-    func stream(_ stream: ChannelStream, hasBytesAvailable bytes: ArraySlice<UInt8>)
-    func stream(_ stream: ChannelStream, hasSpaceAvailable length: Int)
+    func stream(_ stream: ChannelStream, hasBytesAvailable bytes: inout ArraySlice<UInt8>)
+    func stream(_ stream: ChannelStream, hasSpaceAvailable space: Bool)
 }

@@ -8,7 +8,12 @@
 
 #include "fuse_private.h"
 
-int fs_byte_buffer_init(fs_byte_buffer_t* buffer, uint32_t capacity)
+int fs_byte_buffer_init(fs_byte_buffer_t *buffer)
+{
+    return fs_byte_buffer_init_with_capacity(buffer, BUFFER_CAPACITY_DEFAULT);
+}
+
+int fs_byte_buffer_init_with_capacity(fs_byte_buffer_t* buffer, uint32_t capacity)
 {
     /* allocate memory */
     buffer->heap = OPT_CAST(fs_byte) malloc(capacity);

@@ -47,16 +47,19 @@
 		57477A6220B30061007BC236 /* fs_byte_buffer_write_int32.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */; };
 		57477A6320B30061007BC236 /* fs_byte_buffer_write_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */; };
 		57477A6420B30061007BC236 /* fs_byte_buffer_write_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */; };
-		57477A6820B30874007BC236 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6720B30874007BC236 /* Channel.swift */; };
-		57477A6A20B3091E007BC236 /* ChannelPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6920B3091E007BC236 /* ChannelPipeline.swift */; };
-		57477A6D20B339FA007BC236 /* ChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6C20B339F9007BC236 /* ChannelHandler.swift */; };
-		57477A7020B33A18007BC236 /* ChannelHandlerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */; };
-		57477A7220B438B2007BC236 /* ByteBufferError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A7120B438B2007BC236 /* ByteBufferError.swift */; };
-		57867BF520B47C700004456A /* ChannelStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF420B47C700004456A /* ChannelStream.swift */; };
+		57867BF720B575840004456A /* fs_byte_buffer_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF620B575840004456A /* fs_byte_buffer_resize.c */; };
+		57867BFB20BC24E30004456A /* ByteToMessageCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF920BC20C70004456A /* ByteToMessageCodec.swift */; };
+		57867BFC20BC24EA0004456A /* ChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6C20B339F9007BC236 /* ChannelHandler.swift */; };
+		57867BFD20BC24EA0004456A /* ChannelHandlerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */; };
+		57867BFE20BC24EF0004456A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6720B30874007BC236 /* Channel.swift */; };
+		57867BFF20BC24EF0004456A /* ChannelStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF420B47C700004456A /* ChannelStream.swift */; };
+		57867C0020BC24EF0004456A /* ChannelPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6920B3091E007BC236 /* ChannelPipeline.swift */; };
+		57867C0520BC24FC0004456A /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */; };
+		57867C0620BC24FC0004456A /* ByteBufferError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A7120B438B2007BC236 /* ByteBufferError.swift */; };
+		57867C0720BC24FC0004456A /* ByteBufferEndianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */; };
+		57867C0820BC24FC0004456A /* fs_byte_buffer_t+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */; };
+		57867C0920BC25080004456A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5786941520AF675E001F3DC6 /* Info.plist */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */; };
-		5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */; };
-		5786946920B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */; };
 		5786949C20B19398001F3DC6 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5786949D20B1939E001F3DC6 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		578694AB20B19408001F3DC6 /* fs_error.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786942920B02AE9001F3DC6 /* fs_error.c */; };
@@ -116,6 +119,8 @@
 		57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerContext.swift; sourceTree = "<group>"; };
 		57477A7120B438B2007BC236 /* ByteBufferError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferError.swift; sourceTree = "<group>"; };
 		57867BF420B47C700004456A /* ChannelStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelStream.swift; sourceTree = "<group>"; };
+		57867BF620B575840004456A /* fs_byte_buffer_resize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_resize.c; sourceTree = "<group>"; };
+		57867BF920BC20C70004456A /* ByteToMessageCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteToMessageCodec.swift; sourceTree = "<group>"; };
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,10 +191,19 @@
 		57477A6B20B339E7007BC236 /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
+				57867BF820B9A8BE0004456A /* Codecs */,
 				57477A6C20B339F9007BC236 /* ChannelHandler.swift */,
 				57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */,
 			);
 			path = Handlers;
+			sourceTree = "<group>";
+		};
+		57867BF820B9A8BE0004456A /* Codecs */ = {
+			isa = PBXGroup;
+			children = (
+				57867BF920BC20C70004456A /* ByteToMessageCodec.swift */,
+			);
+			path = Codecs;
 			sourceTree = "<group>";
 		};
 		5786940720AF675E001F3DC6 = {
@@ -260,6 +274,7 @@
 				5786942220B01ED4001F3DC6 /* fs_byte_buffer_init.c */,
 				5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */,
 				5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */,
+				57867BF620B575840004456A /* fs_byte_buffer_resize.c */,
 				57477A2D20B2D69D007BC236 /* fs_byte_buffer_get_int8.c */,
 				57477A3120B2D8E3007BC236 /* fs_byte_buffer_get_int16.c */,
 				57477A3520B2D8FD007BC236 /* fs_byte_buffer_get_int32.c */,
@@ -436,6 +451,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57867C0920BC25080004456A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,9 +469,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5786941E20AF67CF001F3DC6 /* ByteBuffer.swift in Sources */,
-				5786942020AF99D7001F3DC6 /* ByteBufferEndianness.swift in Sources */,
-				5786946920B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift in Sources */,
+				57867C0620BC24FC0004456A /* ByteBufferError.swift in Sources */,
+				57867BFE20BC24EF0004456A /* Channel.swift in Sources */,
+				57867BFC20BC24EA0004456A /* ChannelHandler.swift in Sources */,
+				57867C0520BC24FC0004456A /* ByteBuffer.swift in Sources */,
+				57867BFF20BC24EF0004456A /* ChannelStream.swift in Sources */,
+				57867C0820BC24FC0004456A /* fs_byte_buffer_t+extensions.swift in Sources */,
+				57867C0720BC24FC0004456A /* ByteBufferEndianness.swift in Sources */,
+				57867BFD20BC24EA0004456A /* ChannelHandlerContext.swift in Sources */,
+				57867C0020BC24EF0004456A /* ChannelPipeline.swift in Sources */,
+				57867BFB20BC24E30004456A /* ByteToMessageCodec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,24 +521,19 @@
 			files = (
 				578694AB20B19408001F3DC6 /* fs_error.c in Sources */,
 				57477A3220B2D8E3007BC236 /* fs_byte_buffer_get_int16.c in Sources */,
-				57477A7020B33A18007BC236 /* ChannelHandlerContext.swift in Sources */,
 				57477A3820B2D90B007BC236 /* fs_byte_buffer_set_int32.c in Sources */,
-				57477A6A20B3091E007BC236 /* ChannelPipeline.swift in Sources */,
 				578694AC20B19408001F3DC6 /* fs_byte_buffer_init.c in Sources */,
 				578694AD20B19408001F3DC6 /* fs_byte_buffer_free.c in Sources */,
 				57477A3420B2D8F0007BC236 /* fs_byte_buffer_set_int16.c in Sources */,
 				578694AE20B19408001F3DC6 /* fs_byte_buffer_copy.c in Sources */,
-				57477A6820B30874007BC236 /* Channel.swift in Sources */,
 				57477A3C20B2D92D007BC236 /* fs_byte_buffer_set_int64.c in Sources */,
 				57477A2E20B2D69D007BC236 /* fs_byte_buffer_get_int8.c in Sources */,
 				57477A3620B2D8FD007BC236 /* fs_byte_buffer_get_int32.c in Sources */,
 				578694AF20B19408001F3DC6 /* fs_byte_buffer_read_int8.c in Sources */,
 				578694B020B19408001F3DC6 /* fs_byte_buffer_read_int16.c in Sources */,
-				57477A6D20B339FA007BC236 /* ChannelHandler.swift in Sources */,
 				578694B120B19408001F3DC6 /* fs_byte_buffer_read_int32.c in Sources */,
 				57477A3A20B2D91C007BC236 /* fs_byte_buffer_get_int64.c in Sources */,
 				57477A3020B2D6B7007BC236 /* fs_byte_buffer_set_int8.c in Sources */,
-				57867BF520B47C700004456A /* ChannelStream.swift in Sources */,
 				578694B220B19408001F3DC6 /* fs_byte_buffer_read_int64.c in Sources */,
 				578694B320B19408001F3DC6 /* fs_byte_buffer_read_bytes.c in Sources */,
 				578694B420B19408001F3DC6 /* fs_byte_buffer_write_int8.c in Sources */,
@@ -523,8 +541,8 @@
 				578694B620B19408001F3DC6 /* fs_byte_buffer_write_int32.c in Sources */,
 				578694B720B19408001F3DC6 /* fs_byte_buffer_write_int64.c in Sources */,
 				57477A4020B2D952007BC236 /* fs_byte_buffer_set_bytes.c in Sources */,
+				57867BF720B575840004456A /* fs_byte_buffer_resize.c in Sources */,
 				57477A3E20B2D942007BC236 /* fs_byte_buffer_get_bytes.c in Sources */,
-				57477A7220B438B2007BC236 /* ByteBufferError.swift in Sources */,
 				578694B820B19408001F3DC6 /* fs_byte_buffer_write_bytes.c in Sources */,
 				578694B920B19408001F3DC6 /* fs_byte_buffer_is_readable.c in Sources */,
 				578694BA20B19408001F3DC6 /* fs_byte_buffer_is_writable.c in Sources */,
@@ -776,6 +794,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -784,6 +803,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "i386 arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -805,6 +825,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "i386 arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
