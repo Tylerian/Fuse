@@ -39,26 +39,26 @@ public class ByteToMessageCodec<In, Out>: DuplexChannelHandler {
         fatalError("func channel(_:encode:output) must be implemented by subclass.")
     }
     
-    public func channel(_ context: ChannelHandlerContext, decode bytes: ByteBuffer, output: [Out]) throws {
+    public func channel(_ context: ChannelHandlerContext, decode bytes: ByteBuffer, output: inout [Out]) throws {
         fatalError("func channel(_:decode:output) must be implemented by subclass.")
     }
     
     private class _ByteToMessageDecoder: ByteToMessageDecoder<Out> {
-        unowned let codec: ByteToMessageCodec
+        unowned let codec: ByteToMessageCodec<In, Out>
         
-        private init(codec: ByteToMessageCodec) {
+        private init(codec: ByteToMessageCodec<In, Out>) {
             self.codec = codec
         }
         
-        override func channel(_ context: ChannelHandlerContext, decode bytes: ByteBuffer, output: [Out]) throws {
-            try self.codec.channel(context, decode: bytes, output: output)
+        override func channel(_ context: ChannelHandlerContext, decode bytes: ByteBuffer, output: inout [Out]) throws {
+            try self.codec.channel(context, decode: bytes, output: &output)
         }
     }
     
     private class _MessageToByteEncoder: MessageToByteEncoder<In> {
-        unowned let codec: ByteToMessageCodec
+        unowned let codec: ByteToMessageCodec<In, Out>
         
-        private init(codec: ByteToMessageCodec) {
+        private init(codec: ByteToMessageCodec<In, Out>) {
             self.codec = codec
         }
         
@@ -85,13 +85,20 @@ public class ByteToMessageDecoder<Out>: InboundChannelHandler {
     
     public func channel(_ context: ChannelHandlerContext, read message: Any) {
         guard let buffer = message as? ByteBuffer else {
-            context.fire(channel: context.channel, read: message) return
+            context.fire(channel: context.channel, read: message)
+            return
         }
         
+        do {
+            var output = Array<Out>()
+            try self.channel(context, decode: buffer, output: &output)
+        } catch {
+            
+        }
         
     }
     
-    public func channel(_ context: ChannelHandlerContext, decode bytes: ByteBuffer, output: [Out]) throws {
+    public func channel(_ context: ChannelHandlerContext, decode bytes: ByteBuffer, output: inout [Out]) throws {
         fatalError("func channel(_:decode:output) must be implemented by subclass.")
     }
 }

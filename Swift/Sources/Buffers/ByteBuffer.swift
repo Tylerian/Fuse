@@ -5,6 +5,7 @@ public protocol ByteBuffer:
     ByteBufferReadable,
     ByteBufferWritable {
     
+    init()
     init(capacity: Int)
     
     func copy() -> ByteBuffer
@@ -46,9 +47,9 @@ public protocol ByteBufferWritable {
 public class UnsafeByteBuffer: ByteBuffer {
     private var handle: fs_byte_buffer_t
     
-    public init(capacity: Int) {
+    public required init() {
         self.handle = fs_byte_buffer_t()
-        let  result = fs_byte_buffer_init(&self.handle, UInt32(capacity));
+        let  result = fs_byte_buffer_init(&self.handle);
         
         guard result == FS_OKAY else {
             let message = String(cString: fs_error_to_string(result))
@@ -56,8 +57,46 @@ public class UnsafeByteBuffer: ByteBuffer {
         }
     }
     
+    public required init(capacity: Int) {
+        self.handle = fs_byte_buffer_t()
+        let  result = fs_byte_buffer_init_with_capacity(&self.handle, UInt32(capacity));
+        
+        guard result == FS_OKAY else {
+            let message = String(cString: fs_error_to_string(result))
+            fatalError("Fatal error while initializing underlying memory storage. Reason: \(message)")
+        }
+    }
+    private init(handle: fs_byte_buffer_t) {
+        self.handle = handle
+    }
+    
     deinit {
         fs_byte_buffer_free(&self.handle)
+    }
+    
+    public func copy() -> ByteBuffer {
+        let copy   = UnsafeByteBuffer()
+        let result = fs_byte_buffer_copy(&self.handle, &copy.handle)
+        
+        guard result == FS_OKAY else {
+            let message = String(cString: fs_error_to_string(result))
+            fatalError("Fatal error while creating a copy of this UnsafeByteBuffer: \(String(describing: self)).\nReason: \(message)")
+        }
+        
+        return copy
+    }
+    
+    public func copy(to buffer: ByteBuffer) {
+        guard let buffer = buffer as? UnsafeByteBuffer else {
+            return
+        }
+        
+        let result = fs_byte_buffer_copy(&self.handle, &buffer.handle)
+        
+        guard result == FS_OKAY else {
+            let message = String(cString: fs_error_to_string(result))
+            fatalError("Fatal error while copying ByteBuffer: \(String(describing: self)) to ByteBuffer: \(String(describing: buffer)).\nReason: \(message)")
+        }
     }
 }
 

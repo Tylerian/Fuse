@@ -14,43 +14,59 @@ public protocol ChannelHandler: class {
 }
 
 extension ChannelHandler {
-    func handler(added context: ChannelHandlerContext) {
+    public func handler(added context: ChannelHandlerContext) {
         // NOOP
     }
     
-    func handler(removed context: ChannelHandlerContext) {
+    public func handler(removed context: ChannelHandlerContext) {
         // NOOP
     }
 }
 
 public protocol InboundChannelHandler: ChannelHandler {
-    func channel(connected context: ChannelHandlerContext)
-    func channel(disconnected context: ChannelHandlerContext)
+    func channel(active context: ChannelHandlerContext)
+    func channel(inactive context: ChannelHandlerContext)
     
+    func channel(_ context: ChannelHandlerContext, error: Error)
     func channel(_ context: ChannelHandlerContext, read message: Any)
 }
 
 extension InboundChannelHandler {
-    func channel(connected context: ChannelHandlerContext) {
-        context.fireChannelConnected()
+    public func channel(active context: ChannelHandlerContext) {
+        context.fireChannelActive()
     }
     
-    func channel(disconnected context: ChannelHandlerContext) {
-        context.fireChannelDisconnected()
+    public func channel(inactive context: ChannelHandlerContext) {
+        context.fireChannelInactive()
     }
     
-    func channel(_ context: ChannelHandlerContext, read message: Any) {
-        context.fire(channel: context.channel, read: message)
+    public func channel(_ context: ChannelHandlerContext, error: Error) {
+        context.fireErrorCaught(error)
+    }
+    
+    public func channel(_ context: ChannelHandlerContext, read message: Any) {
+        context.fireChannelRead(message)
     }
 }
 
 public protocol OutboundChannelHandler: ChannelHandler {
+    func channel(connect    context: ChannelHandlerContext, to host: String, port: Int)
+    func channel(disconnect context: ChannelHandlerContext)
+    
     func channel(_ context: ChannelHandlerContext, write message: Any)
 }
 
 extension OutboundChannelHandler {
-    func channel(_ context: ChannelHandlerContext, write message: Any) {
-        context.fire(channel: context.channel, write: message)
+    public func channel(connect context: ChannelHandlerContext, to host: String, port: Int) {
+        context.connect(to: host, port: port)
+    }
+    
+    public func channel(disconnect context: ChannelHandlerContext) {
+        context.disconnect()
+    }
+    
+    public func channel(_ context: ChannelHandlerContext, write message: Any) {
+        context.write(message)
     }
 }
 

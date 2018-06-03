@@ -52,13 +52,17 @@
 		57867BFC20BC24EA0004456A /* ChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6C20B339F9007BC236 /* ChannelHandler.swift */; };
 		57867BFD20BC24EA0004456A /* ChannelHandlerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */; };
 		57867BFE20BC24EF0004456A /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6720B30874007BC236 /* Channel.swift */; };
-		57867BFF20BC24EF0004456A /* ChannelStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF420B47C700004456A /* ChannelStream.swift */; };
 		57867C0020BC24EF0004456A /* ChannelPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A6920B3091E007BC236 /* ChannelPipeline.swift */; };
 		57867C0520BC24FC0004456A /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */; };
 		57867C0620BC24FC0004456A /* ByteBufferError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57477A7120B438B2007BC236 /* ByteBufferError.swift */; };
 		57867C0720BC24FC0004456A /* ByteBufferEndianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */; };
 		57867C0820BC24FC0004456A /* fs_byte_buffer_t+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */; };
 		57867C0920BC25080004456A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5786941520AF675E001F3DC6 /* Info.plist */; };
+		57867C7920BF5E340004456A /* FuseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C7820BF5E340004456A /* FuseTests.swift */; };
+		57867C7B20BF5E340004456A /* Fuse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5786941120AF675E001F3DC6 /* Fuse.framework */; };
+		57867C8120BF5E440004456A /* ChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C7020BF5DCB0004456A /* ChannelTests.swift */; };
+		57867C8320C1EFCF0004456A /* ByteBufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8220C1EFCF0004456A /* ByteBufferTests.swift */; };
+		57867C8520C41C980004456A /* ChannelHandlerInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8420C41C980004456A /* ChannelHandlerInvoker.swift */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5786949C20B19398001F3DC6 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5786949D20B1939E001F3DC6 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -87,6 +91,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5786948320B1930A001F3DC6;
 			remoteInfo = CFuse;
+		};
+		57867C7C20BF5E340004456A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5786940820AF675E001F3DC6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5786941020AF675E001F3DC6;
+			remoteInfo = Fuse;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -118,9 +129,14 @@
 		57477A6C20B339F9007BC236 /* ChannelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandler.swift; sourceTree = "<group>"; };
 		57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerContext.swift; sourceTree = "<group>"; };
 		57477A7120B438B2007BC236 /* ByteBufferError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferError.swift; sourceTree = "<group>"; };
-		57867BF420B47C700004456A /* ChannelStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelStream.swift; sourceTree = "<group>"; };
 		57867BF620B575840004456A /* fs_byte_buffer_resize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_resize.c; sourceTree = "<group>"; };
 		57867BF920BC20C70004456A /* ByteToMessageCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteToMessageCodec.swift; sourceTree = "<group>"; };
+		57867C7020BF5DCB0004456A /* ChannelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTests.swift; sourceTree = "<group>"; };
+		57867C7620BF5E340004456A /* FuseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FuseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		57867C7820BF5E340004456A /* FuseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuseTests.swift; sourceTree = "<group>"; };
+		57867C7A20BF5E340004456A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57867C8220C1EFCF0004456A /* ByteBufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferTests.swift; sourceTree = "<group>"; };
+		57867C8420C41C980004456A /* ChannelHandlerInvoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerInvoker.swift; sourceTree = "<group>"; };
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -152,6 +168,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		57867C7320BF5E340004456A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57867C7B20BF5E340004456A /* Fuse.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5786940D20AF675E001F3DC6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -182,7 +206,6 @@
 			children = (
 				57477A6B20B339E7007BC236 /* Handlers */,
 				57477A6720B30874007BC236 /* Channel.swift */,
-				57867BF420B47C700004456A /* ChannelStream.swift */,
 				57477A6920B3091E007BC236 /* ChannelPipeline.swift */,
 			);
 			path = Channels;
@@ -193,6 +216,7 @@
 			children = (
 				57867BF820B9A8BE0004456A /* Codecs */,
 				57477A6C20B339F9007BC236 /* ChannelHandler.swift */,
+				57867C8420C41C980004456A /* ChannelHandlerInvoker.swift */,
 				57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */,
 			);
 			path = Handlers;
@@ -206,11 +230,30 @@
 			path = Codecs;
 			sourceTree = "<group>";
 		};
+		57867C6E20BF5D900004456A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				57867C7020BF5DCB0004456A /* ChannelTests.swift */,
+				57867C8220C1EFCF0004456A /* ByteBufferTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		57867C7720BF5E340004456A /* FuseTests */ = {
+			isa = PBXGroup;
+			children = (
+				57867C7820BF5E340004456A /* FuseTests.swift */,
+				57867C7A20BF5E340004456A /* Info.plist */,
+			);
+			path = FuseTests;
+			sourceTree = "<group>";
+		};
 		5786940720AF675E001F3DC6 = {
 			isa = PBXGroup;
 			children = (
 				5786942620B02A51001F3DC6 /* C */,
 				5786942520B02A44001F3DC6 /* Swift */,
+				57867C7720BF5E340004456A /* FuseTests */,
 				5786941220AF675E001F3DC6 /* Products */,
 				5786946620B0F8F9001F3DC6 /* Frameworks */,
 			);
@@ -222,6 +265,7 @@
 				5786941120AF675E001F3DC6 /* Fuse.framework */,
 				5786948420B1930A001F3DC6 /* CFuse.framework */,
 				578694A220B193EE001F3DC6 /* libfuse.a */,
+				57867C7620BF5E340004456A /* FuseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,6 +295,7 @@
 		5786942520B02A44001F3DC6 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
+				57867C6E20BF5D900004456A /* Tests */,
 				5786941320AF675E001F3DC6 /* Sources */,
 			);
 			path = Swift;
@@ -350,6 +395,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		57867C7520BF5E340004456A /* FuseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57867C7E20BF5E340004456A /* Build configuration list for PBXNativeTarget "FuseTests" */;
+			buildPhases = (
+				57867C7220BF5E340004456A /* Sources */,
+				57867C7320BF5E340004456A /* Frameworks */,
+				57867C7420BF5E340004456A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				57867C7D20BF5E340004456A /* PBXTargetDependency */,
+			);
+			name = FuseTests;
+			productName = FuseTests;
+			productReference = 57867C7620BF5E340004456A /* FuseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5786941020AF675E001F3DC6 /* Fuse */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5786941920AF675E001F3DC6 /* Build configuration list for PBXNativeTarget "Fuse" */;
@@ -411,9 +474,13 @@
 		5786940820AF675E001F3DC6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Tylerian;
 				TargetAttributes = {
+					57867C7520BF5E340004456A = {
+						CreatedOnToolsVersion = 9.3;
+					};
 					5786941020AF675E001F3DC6 = {
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
@@ -442,11 +509,19 @@
 				578694A120B193EE001F3DC6 /* fuse */,
 				5786941020AF675E001F3DC6 /* Fuse */,
 				5786948320B1930A001F3DC6 /* CFuse */,
+				57867C7520BF5E340004456A /* FuseTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		57867C7420BF5E340004456A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5786940F20AF675E001F3DC6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +540,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		57867C7220BF5E340004456A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57867C7920BF5E340004456A /* FuseTests.swift in Sources */,
+				57867C8120BF5E440004456A /* ChannelTests.swift in Sources */,
+				57867C8320C1EFCF0004456A /* ByteBufferTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5786940C20AF675E001F3DC6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -473,12 +558,12 @@
 				57867BFE20BC24EF0004456A /* Channel.swift in Sources */,
 				57867BFC20BC24EA0004456A /* ChannelHandler.swift in Sources */,
 				57867C0520BC24FC0004456A /* ByteBuffer.swift in Sources */,
-				57867BFF20BC24EF0004456A /* ChannelStream.swift in Sources */,
 				57867C0820BC24FC0004456A /* fs_byte_buffer_t+extensions.swift in Sources */,
 				57867C0720BC24FC0004456A /* ByteBufferEndianness.swift in Sources */,
 				57867BFD20BC24EA0004456A /* ChannelHandlerContext.swift in Sources */,
 				57867C0020BC24EF0004456A /* ChannelPipeline.swift in Sources */,
 				57867BFB20BC24E30004456A /* ByteToMessageCodec.swift in Sources */,
+				57867C8520C41C980004456A /* ChannelHandlerInvoker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,9 +642,50 @@
 			target = 5786948320B1930A001F3DC6 /* CFuse */;
 			targetProxy = 57477A2B20B19553007BC236 /* PBXContainerItemProxy */;
 		};
+		57867C7D20BF5E340004456A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5786941020AF675E001F3DC6 /* Fuse */;
+			targetProxy = 57867C7C20BF5E340004456A /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		57867C7F20BF5E340004456A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				INFOPLIST_FILE = FuseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tylerian.FuseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		57867C8020BF5E340004456A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4FPK9XX5W;
+				INFOPLIST_FILE = FuseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.tylerian.FuseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5786941720AF675E001F3DC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -832,6 +958,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		57867C7E20BF5E340004456A /* Build configuration list for PBXNativeTarget "FuseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57867C7F20BF5E340004456A /* Debug */,
+				57867C8020BF5E340004456A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5786940B20AF675E001F3DC6 /* Build configuration list for PBXProject "Fuse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
