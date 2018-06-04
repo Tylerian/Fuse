@@ -50,10 +50,9 @@ typedef struct {
     
 /* --> memory management functions <-- */
 int fs_byte_buffer_free(fs_byte_buffer_t* buffer);
-int fs_byte_buffer_init(fs_byte_buffer_t* buffer);
-int fs_byte_buffer_init_with_capacity(fs_byte_buffer_t* buffer, uint32_t capacity);
-int fs_byte_buffer_copy(fs_byte_buffer_t* a, fs_byte_buffer_t* b);
-int fs_byte_buffer_resize(fs_byte_buffer_t *buffer, uint32_t min);
+int fs_byte_buffer_init(fs_byte_buffer_t* buffer, uint32_t capacity);
+int fs_byte_buffer_copy(fs_byte_buffer_t* dst, fs_byte_buffer_t* src);
+int fs_byte_buffer_resize(fs_byte_buffer_t *buffer, uint32_t capacity);
 
 /* --> Capacity functions <-- */
 int fs_byte_buffer_is_readable (fs_byte_buffer_t* buffer);

@@ -10,13 +10,15 @@ import Foundation
 
 public final class ChannelHandlerContext {
     public let name: String
+    public let channel: Channel
     public let handler: ChannelHandler
     
     public var next: ChannelHandlerContext?
     public var prev: ChannelHandlerContext?
     
-    internal init(name: String, handler: ChannelHandler) {
+    internal init(name: String, channel: Channel, handler: ChannelHandler) {
         self.name    = name
+        self.channel = channel
         self.handler = handler
     }
 }
@@ -37,7 +39,9 @@ extension ChannelHandlerContext: InboundChannelHandlerInvoker {
     public func fireChannelRead(_ message: Any) {
         self.next?.triggerChannelRead(message)
     }
-    
+}
+
+extension ChannelHandlerContext {
     internal func triggerChannelActive() {
         guard let handler = handler as? InboundChannelHandler else {
             return
@@ -83,7 +87,9 @@ extension ChannelHandlerContext: OutboundChannelHandlerInvoker {
     public func write(_ message: Any) {
         self.prev?.triggerWrite(message)
     }
-    
+}
+
+extension ChannelHandlerContext {
     internal func triggerConnect(to host: String, port: Int) {
         guard let handler = handler as? OutboundChannelHandler else {
             return

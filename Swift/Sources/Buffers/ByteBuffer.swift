@@ -4,7 +4,6 @@ import CFuse
 public protocol ByteBuffer:
     ByteBufferReadable,
     ByteBufferWritable {
-    
     init()
     init(capacity: Int)
     
@@ -47,27 +46,18 @@ public protocol ByteBufferWritable {
 public class UnsafeByteBuffer: ByteBuffer {
     private var handle: fs_byte_buffer_t
     
-    public required init() {
-        self.handle = fs_byte_buffer_t()
-        let  result = fs_byte_buffer_init(&self.handle);
-        
-        guard result == FS_OKAY else {
-            let message = String(cString: fs_error_to_string(result))
-            fatalError("Fatal error while initializing underlying memory storage. Reason: \(message)")
-        }
+    public required convenience init() {
+        self.init(capacity: kDefaultCapacity)
     }
     
     public required init(capacity: Int) {
         self.handle = fs_byte_buffer_t()
-        let  result = fs_byte_buffer_init_with_capacity(&self.handle, UInt32(capacity));
+        let  result = fs_byte_buffer_init(&self.handle, UInt32(capacity));
         
         guard result == FS_OKAY else {
             let message = String(cString: fs_error_to_string(result))
             fatalError("Fatal error while initializing underlying memory storage. Reason: \(message)")
         }
-    }
-    private init(handle: fs_byte_buffer_t) {
-        self.handle = handle
     }
     
     deinit {
@@ -413,3 +403,5 @@ extension UnsafeByteBuffer: ByteBufferWritable {
         return self
     }
 }
+
+fileprivate let kDefaultCapacity: Int = 256

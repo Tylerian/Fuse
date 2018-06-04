@@ -8,7 +8,7 @@
 
 #include "fuse_private.h"
 
-int fs_byte_buffer_copy(fs_byte_buffer_t *a, fs_byte_buffer_t *b)
+int fs_byte_buffer_copy(fs_byte_buffer_t *dst, fs_byte_buffer_t *src)
 {
     // TODO
     

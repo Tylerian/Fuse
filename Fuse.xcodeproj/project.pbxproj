@@ -61,8 +61,10 @@
 		57867C7920BF5E340004456A /* FuseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C7820BF5E340004456A /* FuseTests.swift */; };
 		57867C7B20BF5E340004456A /* Fuse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5786941120AF675E001F3DC6 /* Fuse.framework */; };
 		57867C8120BF5E440004456A /* ChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C7020BF5DCB0004456A /* ChannelTests.swift */; };
-		57867C8320C1EFCF0004456A /* ByteBufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8220C1EFCF0004456A /* ByteBufferTests.swift */; };
+		57867C8320C1EFCF0004456A /* ByteBufTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8220C1EFCF0004456A /* ByteBufTests.swift */; };
 		57867C8520C41C980004456A /* ChannelHandlerInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8420C41C980004456A /* ChannelHandlerInvoker.swift */; };
+		57867C9120C597FE0004456A /* ChannelHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8F20C597F80004456A /* ChannelHandlerTests.swift */; };
+		57867C9320C598100004456A /* ChannelPipelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C9220C598100004456A /* ChannelPipelineTests.swift */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5786949C20B19398001F3DC6 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5786949D20B1939E001F3DC6 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -135,8 +137,10 @@
 		57867C7620BF5E340004456A /* FuseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FuseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57867C7820BF5E340004456A /* FuseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuseTests.swift; sourceTree = "<group>"; };
 		57867C7A20BF5E340004456A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57867C8220C1EFCF0004456A /* ByteBufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferTests.swift; sourceTree = "<group>"; };
+		57867C8220C1EFCF0004456A /* ByteBufTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufTests.swift; sourceTree = "<group>"; };
 		57867C8420C41C980004456A /* ChannelHandlerInvoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerInvoker.swift; sourceTree = "<group>"; };
+		57867C8F20C597F80004456A /* ChannelHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerTests.swift; sourceTree = "<group>"; };
+		57867C9220C598100004456A /* ChannelPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPipelineTests.swift; sourceTree = "<group>"; };
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -233,8 +237,10 @@
 		57867C6E20BF5D900004456A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				57867C8220C1EFCF0004456A /* ByteBufTests.swift */,
 				57867C7020BF5DCB0004456A /* ChannelTests.swift */,
-				57867C8220C1EFCF0004456A /* ByteBufferTests.swift */,
+				57867C8F20C597F80004456A /* ChannelHandlerTests.swift */,
+				57867C9220C598100004456A /* ChannelPipelineTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -546,7 +552,9 @@
 			files = (
 				57867C7920BF5E340004456A /* FuseTests.swift in Sources */,
 				57867C8120BF5E440004456A /* ChannelTests.swift in Sources */,
-				57867C8320C1EFCF0004456A /* ByteBufferTests.swift in Sources */,
+				57867C9120C597FE0004456A /* ChannelHandlerTests.swift in Sources */,
+				57867C8320C1EFCF0004456A /* ByteBufTests.swift in Sources */,
+				57867C9320C598100004456A /* ChannelPipelineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

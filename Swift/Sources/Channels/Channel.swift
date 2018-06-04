@@ -1,50 +1,55 @@
 import Foundation
 
-public protocol Channel: class {
-    func disconnect()
-    func connect(to host: String, port: Int)
+public class Channel<T: ChannelUnsafe> {
+    internal let unsafe: T
     
-    func write(_ message: AnyObject) -> Channel
+    fileprivate init() {
+        self.unsafe = T()
+    }
+    
+    public func connect(to host: String, port: Int) {
+        fatalError("Channel.connect(_:_:) method must be overriden at inheriting class!")
+    }
+    
+    public func disconnect() {
+        fatalError("Channel.disconnect() method must be overriden at inheriting class!")
+    }
+    
+    public func write(_ message: Any) {
+        fatalError("Channel.write(_:) method must be overriden at inheriting class!")
+    }
 }
 
-public final class StreamingChannel {
-    private var stream: ChannelStream?
-    unowned var pipeline: ChannelPipeline
+public protocol ChannelUnsafe {
+    init()
+    
+    func open(host: String, port: Int)
+    func close()
+    
+    func write(_ message: ByteBuffer)
+}
+
+public final class StreamingChannel: Channel<ChannelStream> {
+    internal unowned var pipeline: ChannelPipeline
     
     public init(pipeline: ChannelPipeline) {
         self.pipeline = pipeline
     }
-}
-
-extension StreamingChannel: Channel {
-    public func disconnect() {
-        guard let stream = self.stream else {
-            return
-        }
-        
-        stream.close()
+    
+    public override func connect(to host: String, port: Int) {
+        self.pipeline.connect(to: host, port: port)
     }
     
-    public func connect(to host: String, port: Int) {
-        self.stream = ChannelStream(host: host, port: port)
-        
-        if let stream = self.stream {
-            stream.delegate = self
-            stream.open()
-        }
+    public override func disconnect() {
+        self.pipeline.disconnect()
     }
     
-    public func write(_ message: AnyObject)  -> Channel {
-        guard let stream = self.stream else {
-            fatalError("Channel.write(_:) was called without an open connection.")
-        }
-        
-        return self
+    public override func write(_ message: Any) {
+        self.pipeline.write(message)
     }
 }
 
-fileprivate class ChannelStream: NSObject {
-    
+public class ChannelStream: NSObject {
     private let input: InputStream
     private let output: OutputStream
     
@@ -70,8 +75,11 @@ fileprivate class ChannelStream: NSObject {
         self.output = output
         self.buffer = [UInt8](repeating: 0, count: kDefaultBufferSize)
     }
+}
+
+extension ChannelStream: ChannelUnsafe {
     
-    fileprivate func open() {
+    public func open() {
         self.input.schedule(in: .current, forMode: .defaultRunLoopMode)
         self.output.schedule(in: .current, forMode: .defaultRunLoopMode)
         
@@ -79,7 +87,7 @@ fileprivate class ChannelStream: NSObject {
         self.output.open()
     }
     
-    fileprivate func close() {
+    public func close() {
         self.input.close()
         self.input.close()
         
@@ -87,7 +95,7 @@ fileprivate class ChannelStream: NSObject {
         self.input.remove(from: .current, forMode: .defaultRunLoopMode)
     }
     
-    fileprivate func write(_ bytes: ByteBuffer) {
+    public func write(_ bytes: ByteBuffer) {
         if writable {
             
         }
@@ -95,7 +103,7 @@ fileprivate class ChannelStream: NSObject {
 }
 
 extension ChannelStream: StreamDelegate {
-    fileprivate func stream(_ stream: Stream, handle event: Stream.Event) {
+    public func stream(_ stream: Stream, handle event: Stream.Event) {
         print("stream(_ stream: \(stream), handle event: \(event)")
         
         switch (stream, event) {
