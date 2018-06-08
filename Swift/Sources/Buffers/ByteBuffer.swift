@@ -4,47 +4,80 @@ import CFuse
 public protocol ByteBuffer:
     ByteBufferReadable,
     ByteBufferWritable {
+    var capacity: Int { get set }
+    var unsafe: UnsafeMutablePointer<UInt8> { get }
+    
     init()
     init(capacity: Int)
     
     func copy() -> ByteBuffer
-    func copy(to buffer: ByteBuffer)
 }
 
 public protocol ByteBufferReadable {
-    var readerIndex: Int { get }
+    var readable: Bool { get }
+    var readerIndex: Int { get set }
+    var readableBytes: Int { get }
+    
+    func markReaderIndex() -> Self
+    func resetReaderIndex() -> Self
+    
+    func discardReadBytes() -> Self
     
     func getInt8 (at offset: Int) -> Int8
-    func getInt16(at offset: Int, endianness: ByteBufferEndianness) -> Int16
-    func getInt32(at offset: Int, endianness: ByteBufferEndianness) -> Int32
-    func getInt64(at offset: Int, endianness: ByteBufferEndianness) -> Int64
+    func getInt16(at offset: Int, endianness: Endianness) -> Int16
+    func getInt32(at offset: Int, endianness: Endianness) -> Int32
+    func getInt64(at offset: Int, endianness: Endianness) -> Int64
     func getBytes(at offset: Int, length: Int) -> [UInt8]
     
     func readInt8 () -> Int8
-    func readInt16(endianness: ByteBufferEndianness) -> Int16
-    func readInt32(endianness: ByteBufferEndianness) -> Int32
-    func readInt64(endianness: ByteBufferEndianness) -> Int64
+    func readInt16(endianness: Endianness) -> Int16
+    func readInt32(endianness: Endianness) -> Int32
+    func readInt64(endianness: Endianness) -> Int64
     func readBytes(_ length: Int) -> [UInt8]
 }
 
 public protocol ByteBufferWritable {
+    var writable: Bool { get }
     var writerIndex: Int { get }
+    var writableBytes: Int { get }
+    
+    func markWriterIndex() -> Self
+    func resetWriterIndex() -> Self
     
     mutating func set(int8  value: Int8,    at offset: Int) -> Self
-    mutating func set(int16 value: Int16,   at offset: Int, endianness: ByteBufferEndianness) -> Self
-    mutating func set(int32 value: Int32,   at offset: Int, endianness: ByteBufferEndianness) -> Self
-    mutating func set(int64 value: Int64,   at offset: Int, endianness: ByteBufferEndianness) -> Self
+    mutating func set(int16 value: Int16,   at offset: Int, endianness: Endianness) -> Self
+    mutating func set(int32 value: Int32,   at offset: Int, endianness: Endianness) -> Self
+    mutating func set(int64 value: Int64,   at offset: Int, endianness: Endianness) -> Self
     mutating func set(bytes value: [UInt8], at offset: Int) -> Self
     
     mutating func write(int8  value: Int8) -> Self
-    mutating func write(int16 value: Int16, endianness: ByteBufferEndianness) -> Self
-    mutating func write(int32 value: Int32, endianness: ByteBufferEndianness) -> Self
-    mutating func write(int64 value: Int64, endianness: ByteBufferEndianness) -> Self
+    mutating func write(int16 value: Int16, endianness: Endianness) -> Self
+    mutating func write(int32 value: Int32, endianness: Endianness) -> Self
+    mutating func write(int64 value: Int64, endianness: Endianness) -> Self
     mutating func write(bytes value: [UInt8]) -> Self
 }
 
-public class UnsafeByteBuffer: ByteBuffer {
+internal final class UnsafeByteBuffer: ByteBuffer {
     private var handle: fs_byte_buffer_t
+    
+    public  var capacity: Int {
+        get {
+            return Int(self.handle.capacity)
+        }
+        
+        set(value) {
+            let result = fs_byte_buffer_resize(&self.handle, UInt32(value))
+            
+            guard result == FS_OKAY else {
+                let message = String(cString: fs_error_to_string(result))
+                fatalError("Fatal error while resizing underlying memory storage. Reason: \(message)")
+            }
+        }
+    }
+    
+    internal var unsafe: UnsafeMutablePointer<UInt8> {
+        return self.handle.heap
+    }
     
     public required convenience init() {
         self.init(capacity: kDefaultCapacity)
@@ -75,24 +108,49 @@ public class UnsafeByteBuffer: ByteBuffer {
         
         return copy
     }
-    
-    public func copy(to buffer: ByteBuffer) {
-        guard let buffer = buffer as? UnsafeByteBuffer else {
-            return
-        }
-        
-        let result = fs_byte_buffer_copy(&self.handle, &buffer.handle)
-        
-        guard result == FS_OKAY else {
-            let message = String(cString: fs_error_to_string(result))
-            fatalError("Fatal error while copying ByteBuffer: \(String(describing: self)) to ByteBuffer: \(String(describing: buffer)).\nReason: \(message)")
-        }
-    }
 }
 
 extension UnsafeByteBuffer: ByteBufferReadable {
+    public var readable: Bool {
+        return self.writerIndex > self.readerIndex
+    }
+    
     public var readerIndex: Int {
-        return Int(self.handle.reader_index)
+        get {
+            return Int(self.handle.reader_index)
+        }
+        set (value) {
+            self.handle.reader_index = UInt32(value)
+        }
+    }
+    
+    public var readableBytes: Int {
+        return self.writerIndex - self.readerIndex
+    }
+    
+    public func markReaderIndex() -> Self {
+        return self
+    }
+    
+    public func resetReaderIndex() -> Self {
+        return self
+    }
+    
+    public func discardReadBytes() -> Self {
+        guard self.readerIndex != 0 else {
+            return self
+        }
+        
+        if self.readerIndex == self.writerIndex {
+            self.readerIndex = 0
+            self.writerIndex = 0
+        } else {
+            self.set(bytes: self, at: 0)
+            self.writerIndex -= self.readerIndex
+            self.readerIndex  = 0
+        }
+        
+        return self
     }
     
     public func getInt8(at offset: Int) -> Int8 {
@@ -107,7 +165,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func getInt16(at offset: Int, endianness: ByteBufferEndianness = .bigEndian) -> Int16 {
+    public func getInt16(at offset: Int, endianness: Endianness = .bigEndian) -> Int16 {
         var value = Int16()
         let result: Int32
         
@@ -125,7 +183,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func getInt32(at offset: Int, endianness: ByteBufferEndianness = .bigEndian) -> Int32 {
+    public func getInt32(at offset: Int, endianness: Endianness = .bigEndian) -> Int32 {
         var value = Int32()
         let result: Int32
         
@@ -143,7 +201,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func getInt64(at offset: Int, endianness: ByteBufferEndianness = .bigEndian) -> Int64 {
+    public func getInt64(at offset: Int, endianness: Endianness = .bigEndian) -> Int64 {
         var value = Int64()
         let result: Int32
         
@@ -185,10 +243,10 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func readInt16(endianness: ByteBufferEndianness = .bigEndian) -> Int16 {
+    public func readInt16(endianness: Endianness = .bigEndian) -> Int16 {
         var value = Int16()
         let result: Int32
-            
+        
         if endianness == .bigEndian {
             result = fs_byte_buffer_read_int16_be(&self.handle, &value)
         } else {
@@ -203,7 +261,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func readInt32(endianness: ByteBufferEndianness = .bigEndian) -> Int32 {
+    public func readInt32(endianness: Endianness = .bigEndian) -> Int32 {
         var value = Int32()
         let result: Int32
         
@@ -221,7 +279,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func readInt64(endianness: ByteBufferEndianness = .bigEndian) -> Int64 {
+    public func readInt64(endianness: Endianness = .bigEndian) -> Int64 {
         var value = Int64()
         let result: Int32
         
@@ -253,8 +311,30 @@ extension UnsafeByteBuffer: ByteBufferReadable {
 }
 
 extension UnsafeByteBuffer: ByteBufferWritable {
+    public var writable: Bool {
+        return self.capacity > self.writerIndex
+    }
+    
     public var writerIndex: Int {
-        return Int(self.handle.writer_index)
+        get {
+            return Int(self.handle.writer_index)
+        }
+        
+        set (value) {
+            self.handle.writer_index = UInt32(value)
+        }
+    }
+    
+    public var writableBytes: Int {
+        return self.capacity - self.writerIndex
+    }
+    
+    public func markWriterIndex() -> Self {
+        return self
+    }
+    
+    public func resetWriterIndex() -> Self {
+        return self
     }
     
     public func set(int8 value: Int8, at offset: Int) -> Self {
@@ -268,7 +348,7 @@ extension UnsafeByteBuffer: ByteBufferWritable {
         return self
     }
     
-    public func set(int16 value: Int16, at offset: Int, endianness: ByteBufferEndianness = .bigEndian) -> Self {
+    public func set(int16 value: Int16, at offset: Int, endianness: Endianness = .bigEndian) -> Self {
         let result: Int32
         
         if endianness == .bigEndian {
@@ -285,7 +365,7 @@ extension UnsafeByteBuffer: ByteBufferWritable {
         return self
     }
     
-    public func set(int32 value: Int32, at offset: Int, endianness: ByteBufferEndianness = .bigEndian) -> Self {
+    public func set(int32 value: Int32, at offset: Int, endianness: Endianness = .bigEndian) -> Self {
         let result: Int32
         
         if endianness == .bigEndian {
@@ -302,7 +382,7 @@ extension UnsafeByteBuffer: ByteBufferWritable {
         return self
     }
     
-    public func set(int64 value: Int64, at offset: Int, endianness: ByteBufferEndianness = .bigEndian) -> Self {
+    public func set(int64 value: Int64, at offset: Int, endianness: Endianness = .bigEndian) -> Self {
         let result: Int32
         
         if endianness == .bigEndian {
@@ -341,7 +421,7 @@ extension UnsafeByteBuffer: ByteBufferWritable {
         return self
     }
     
-    public func write(int16 value: Int16, endianness: ByteBufferEndianness = .bigEndian) -> Self {
+    public func write(int16 value: Int16, endianness: Endianness = .bigEndian) -> Self {
         let result: Int32
         
         if endianness == .bigEndian {
@@ -358,7 +438,7 @@ extension UnsafeByteBuffer: ByteBufferWritable {
         return self
     }
     
-    public func write(int32 value: Int32, endianness: ByteBufferEndianness = .bigEndian) -> Self {
+    public func write(int32 value: Int32, endianness: Endianness = .bigEndian) -> Self {
         let result: Int32
         
         if endianness == .bigEndian {
@@ -375,7 +455,7 @@ extension UnsafeByteBuffer: ByteBufferWritable {
         return self
     }
     
-    public func write(int64 value: Int64, endianness: ByteBufferEndianness = .bigEndian) -> Self {
+    public func write(int64 value: Int64, endianness: Endianness = .bigEndian) -> Self {
         let result: Int32
         
         if endianness == .bigEndian {

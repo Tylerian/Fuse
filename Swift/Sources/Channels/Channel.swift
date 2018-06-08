@@ -1,158 +1,221 @@
 import Foundation
 
-public class Channel<T: ChannelUnsafe> {
-    internal let unsafe: T
+public final class Channel {
+    private let _socket: Socket
+    private var _pipeline: ChannelPipeline!
     
-    fileprivate init() {
-        self.unsafe = T()
-    }
-    
-    public func connect(to host: String, port: Int) {
-        fatalError("Channel.connect(_:_:) method must be overriden at inheriting class!")
-    }
-    
-    public func disconnect() {
-        fatalError("Channel.disconnect() method must be overriden at inheriting class!")
-    }
-    
-    public func write(_ message: Any) {
-        fatalError("Channel.write(_:) method must be overriden at inheriting class!")
+    internal init(socket factory: () -> Socket) {
+        self._socket   = factory()
+        self._pipeline = ChannelPipeline(channel: self)
     }
 }
 
-public protocol ChannelUnsafe {
-    init()
-    
-    func open(host: String, port: Int)
-    func close()
-    
-    func write(_ message: ByteBuffer)
-}
-
-public final class StreamingChannel: Channel<ChannelStream> {
-    internal unowned var pipeline: ChannelPipeline
-    
-    public init(pipeline: ChannelPipeline) {
-        self.pipeline = pipeline
+extension Channel {
+    internal var socket: Socket {
+        return self._socket
     }
     
-    public override func connect(to host: String, port: Int) {
-        self.pipeline.connect(to: host, port: port)
-    }
-    
-    public override func disconnect() {
-        self.pipeline.disconnect()
-    }
-    
-    public override func write(_ message: Any) {
-        self.pipeline.write(message)
+    internal var pipeline: ChannelPipeline {
+        return self._pipeline
     }
 }
 
-public class ChannelStream: NSObject {
-    private let input: InputStream
-    private let output: OutputStream
-    
-    private var buffer: [UInt8]
-    
-    private var writable: Bool = false
-    fileprivate var delegate: ChannelStreamDelegate?
-    
-    private let kDefaultBufferSize = 1024
-    
-    fileprivate init(host: String, port: Int)
-    {
-        var a: InputStream?
-        var b: OutputStream?
-        
-        Stream.getStreamsToHost(withName: host, port: port, inputStream: &a, outputStream: &b)
-        
-        guard let input = a, let output = b else {
-            fatalError("Error while attempting to get streams for host: \(host) and port: \(port)")
-        }
-        
-        self.input  = input
-        self.output = output
-        self.buffer = [UInt8](repeating: 0, count: kDefaultBufferSize)
-    }
-}
-
-extension ChannelStream: ChannelUnsafe {
-    
-    public func open() {
-        self.input.schedule(in: .current, forMode: .defaultRunLoopMode)
-        self.output.schedule(in: .current, forMode: .defaultRunLoopMode)
-        
-        self.input.open()
-        self.output.open()
-    }
-    
-    public func close() {
-        self.input.close()
-        self.input.close()
-        
-        self.input.remove(from: .current, forMode: .defaultRunLoopMode)
-        self.input.remove(from: .current, forMode: .defaultRunLoopMode)
-    }
-    
-    public func write(_ bytes: ByteBuffer) {
-        if writable {
-            
-        }
-    }
-}
-
-extension ChannelStream: StreamDelegate {
-    public func stream(_ stream: Stream, handle event: Stream.Event) {
-        print("stream(_ stream: \(stream), handle event: \(event)")
-        
-        switch (stream, event) {
-        case (_, .errorOccurred):
-            if let error = stream.streamError {
-                self.delegate?.stream(self, hasCaughtError: error)
-            }
-            break
-        case (self.input, .openCompleted):
-            self.delegate?.stream(opened: self)
-            break
-        case (self.input, .endEncountered):
-            self.delegate?.stream(closed: self)
-            break
-        case (self.input, .hasBytesAvailable):
-            let available = self.input.read(&self.buffer, maxLength: kDefaultBufferSize)
-            self.delegate?.stream(self, hasBytesAvailable: &self.buffer[0 ..< available])
-            break
-        case (self.output, .hasSpaceAvailable):
-            // TODO: Write from outbuffer
-            break
-        default:
-            break
-        }
-    }
-}
-
-fileprivate protocol ChannelStreamDelegate: class {
-    func stream(opened stream: ChannelStream)
-    func stream(closed stream: ChannelStream)
-    
-    func stream(_ stream: ChannelStream, hasCaughtError error: Error)
-    func stream(_ stream: ChannelStream, hasBytesAvailable bytes: inout ArraySlice<UInt8>)
-}
-
-extension StreamingChannel: ChannelStreamDelegate {
-    fileprivate func stream(opened stream: ChannelStream) {
+extension Channel: SocketDelegate {
+    public func socket(opened socket: Socket) {
         self.pipeline.fireChannelActive()
     }
     
-    fileprivate func stream(closed stream: ChannelStream) {
+    public func socket(closed socket: Socket) {
         self.pipeline.fireChannelInactive()
     }
     
-    fileprivate func stream(_ stream: ChannelStream, hasCaughtError error: Error) {
-        self.pipeline.fireErrorCaught(error)
+    public func socket(_ socket: Socket, hasCaughtError error: Error) {
+        self.pipeline.fireError(error)
     }
     
-    fileprivate func stream(_ stream: ChannelStream, hasBytesAvailable bytes: inout ArraySlice<UInt8>) {
+    public func socket(_ socket: Socket, hasBytesAvailable bytes: ArraySlice<UInt8>) {
         self.pipeline.fireChannelRead(bytes)
     }
 }
+
+public protocol Socket: class {
+    var delegate: SocketDelegate? { get set }
+    
+    init()
+    
+    func close() throws
+    func connect(to host: String, port: Int) throws
+    
+    func read() throws
+    func write(data: Any) throws
+}
+
+public protocol SocketDelegate: class {
+    func socket(opened socket: Socket)
+    func socket(closed socket: Socket)
+    
+    func socket(_ socket: Socket, hasCaughtError error: Error)
+    func socket(_ socket: Socket, hasBytesAvailable bytes: ArraySlice<UInt8>)
+}
+
+public final class TCPSocket: NSObject, Socket {
+    private var _direct: Bool
+    private var _rcvbuf: [UInt8]
+    private var _sndbuf: ByteBuffer
+    
+    private var _input:  InputStream?
+    private var _output: OutputStream?
+    private var _delegate: SocketDelegate?
+    
+    public required override init() {
+        self._direct = false
+        self._rcvbuf = [UInt8](repeating: 0,
+               count: kDefaultRcvBufferCapacity)
+        self._sndbuf = UnsafeByteBuffer(
+            capacity: kDefaultSndBufferCapacity)
+    }
+}
+
+extension TCPSocket {
+    public var delegate: SocketDelegate? {
+        get {
+            return self._delegate
+        }
+        set(value) {
+            self._delegate = value
+        }
+    }
+}
+
+extension TCPSocket {
+    public func close() throws {
+        guard let input = self._input, let output = self._output else {
+            throw ChannelError.failedToGetStreams
+        }
+        
+        if input .streamStatus == .closed,
+           output.streamStatus == .closed {
+            throw ChannelError.alreadyClosed
+        }
+        
+        input.close()
+        output.close()
+        
+        input.remove(from: .current, forMode: .defaultRunLoopMode)
+        output.remove(from: .current, forMode: .defaultRunLoopMode)
+    }
+    
+    public func connect(to host: String, port: Int) throws {
+        Stream.getStreamsToHost(
+            withName: host, port: port,
+            inputStream: &self._input, outputStream: &self._output)
+        
+        guard let input = self._input, let output = self._output else {
+            throw ChannelError.failedToGetStreams
+        }
+        
+        input .schedule(in: .current, forMode: .defaultRunLoopMode)
+        output.schedule(in: .current, forMode: .defaultRunLoopMode)
+        
+        input .open()
+        output.open()
+    }
+}
+
+extension TCPSocket {
+    public func read() throws {
+        guard let input = self._input else {
+            throw SocketError.notInitialized
+        }
+        
+        let available = input.read(&self._rcvbuf, maxLength: kDefaultRcvBufferCapacity)
+        
+        if  available == -1 {
+            throw SocketError.ioError(input.streamError)
+        } else if available != 0 {
+            self._delegate?.socket(self, hasBytesAvailable: self._rcvbuf[0 ..< available])
+        }
+    }
+}
+
+extension TCPSocket {
+    public func write(data: Any) throws {
+        guard let buffer = data as? ByteBuffer else {
+            throw SocketError.notSupportedOutboundDataType
+        }
+        
+        // Make space if needed before
+        // increasing _sndbuf capacity
+        if buffer.readableBytes > self._sndbuf.writableBytes {
+            _ = self._sndbuf.discardReadBytes()
+        }
+        
+        _ = self._sndbuf.write(bytes: buffer)
+        
+        if self._direct {
+            try self.write(data: self._sndbuf)
+        }
+    }
+
+    public func write(data: ByteBuffer) throws {
+        guard let output = self._output else {
+            throw SocketError.notInitialized
+        }
+        
+        guard self._sndbuf.readable else {
+            self._direct = true
+            return
+        }
+        
+        let written = output.write(self._sndbuf.unsafe + self._sndbuf.readerIndex, maxLength: self._sndbuf.readableBytes)
+        
+        if written > 0 {
+            self._direct = false
+            self._sndbuf.readerIndex += written
+        } else if written == -1 {
+            throw SocketError.ioError(output.streamError)
+        }
+    }
+}
+
+extension TCPSocket: StreamDelegate {
+    public func stream(_ stream: Stream, handle event: Stream.Event) {
+        do {
+            switch (stream, event) {
+            case(_, .openCompleted):
+                self._delegate?.socket(opened: self)
+                break
+            case(_, .errorOccurred):
+                throw SocketError.ioError(stream.streamError)
+            case (_, .endEncountered):
+                self._delegate?.socket(closed: self)
+                break
+            case (_input, .hasBytesAvailable):
+                try self.read()
+                break
+            case (_output, .hasSpaceAvailable):
+                try self.write(data: self._sndbuf)
+                break
+            default:
+                break
+            }
+        } catch let error {
+            self._delegate?.socket(self, hasCaughtError: error)
+        }
+    }
+}
+
+public enum ChannelError: Error {
+    case failedToGetStreams
+    case alreadyClosed
+}
+
+public enum SocketError: Error {
+    case closed
+    case ioError(_: Error?)
+    case notInitialized
+    case notSupportedOutboundDataType
+}
+
+fileprivate let kDefaultRcvBufferCapacity: Int = 1024
+fileprivate let kDefaultSndBufferCapacity: Int = 4096

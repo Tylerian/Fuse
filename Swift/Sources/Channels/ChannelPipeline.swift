@@ -1,172 +1,195 @@
-//
-//  ChannelPipeline.swift
-//  fuse
-//
-//  Created by Jairo Tylera on 21/05/18.
-//  Copyright © 2018 Tylerian. All rights reserved.
-//
-
 import Foundation
 
+/// ```
+///                                                    I/O Request
+///                                                    via `Channel` or
+///                                                    `ChannelHandlerContext`
+///                                                      |
+///  +---------------------------------------------------+---------------+
+///  |                           ChannelPipeline         |               |
+///  |                                TAIL              \|/              |
+///  |    +---------------------+            +-----------+----------+    |
+///  |    | Inbound Handler  N  |            | Outbound Handler  1  |    |
+///  |    +----------+----------+            +-----------+----------+    |
+///  |              /|\                                  |               |
+///  |               |                                  \|/              |
+///  |    +----------+----------+            +-----------+----------+    |
+///  |    | Inbound Handler N-1 |            | Outbound Handler  2  |    |
+///  |    +----------+----------+            +-----------+----------+    |
+///  |              /|\                                  .               |
+///  |               .                                   .               |
+///  | ChannelHandlerContext.fireIN_EVT() ChannelHandlerContext.OUT_EVT()|
+///  |        [ method call]                       [method call]         |
+///  |               .                                   .               |
+///  |               .                                  \|/              |
+///  |    +----------+----------+            +-----------+----------+    |
+///  |    | Inbound Handler  2  |            | Outbound Handler M-1 |    |
+///  |    +----------+----------+            +-----------+----------+    |
+///  |              /|\                                  |               |
+///  |               |                                  \|/              |
+///  |    +----------+----------+            +-----------+----------+    |
+///  |    | Inbound Handler  1  |            | Outbound Handler  M  |    |
+///  |    +----------+----------+            +-----------+----------+    |
+///  |              /|\             HEAD                 |               |
+///  +---------------+-----------------------------------+---------------+
+///                  |                                  \|/
+///  +---------------+-----------------------------------+---------------+
+///  |               |                                   |               |
+///  |       [ Socket.read ]                    [ Socket.write ]         |
+///  |                                                                   |
+///  |    Fuse Internal I/O Threads (Transport Implementation)           |
+///  +-------------------------------------------------------------------+
+/// ```
 public final class ChannelPipeline {
+    unowned
+    private let _channel: Channel
+    private let _executor: DispatchQueue
     
-    unowned let channel: Channel
+    private var _head: ChannelHandlerContext?
+    private var _tail: ChannelHandlerContext?
     
-    private var head: ChannelHandlerContext?
-    private var tail: ChannelHandlerContext?
-    
-    public init(channel: Channel) {
-        self.channel = channel
-        self.head    = ChannelHandlerContext(name: HeadChannelHandler.name, channel: channel, handler: HeadChannelHandler())
-        self.tail    = ChannelHandlerContext(name: TailChannelHandler.name, channel: channel, handler: TailChannelHandler())
+    init(channel: Channel) {
+        self._channel  = channel
+        self._executor = DispatchQueue(label: "io.fuse.pipeline.executor")
         
+        self._head = ChannelHandlerContext(name: "pipeline_head_handler", handler: HeadChannelHandler(), executor: self._executor, pipeline: self)
+        self._tail = ChannelHandlerContext(name: "pipeline_tail_handler", handler: TailChannelHandler(), executor: self._executor, pipeline: self)
+        
+        self._head?.next = self._tail
+        self._tail?.prev = self._head
+    }
+    
+    deinit {
+        self.destroy()
     }
 }
 
 extension ChannelPipeline {
-    /// Add a `ChannelHandler` to the `ChannelPipeline`.
-    public func add(handler: ChannelHandler, named name: String, first: Bool = false) -> Bool {
+    internal var channel: Channel {
+        return self._channel
+    }
+    
+    internal var executor: DispatchQueue {
+        return self._executor
+    }
+}
+
+extension ChannelPipeline {
+    private func destroy() {
+        var ctx = self._head
+        
+        while ctx !== self._tail, ctx != nil {
+            ctx = ctx?.next
+            ctx?.next = nil
+            ctx?.prev = nil
+        }
+        
+        self._head = nil
+        self._tail = nil
+    }
+}
+
+extension ChannelPipeline {
+    public func add(handler: ChannelHandler, named name: String, first: Bool = false, executor: DispatchQueue? = nil) {
         if first {
-            return self.add(handler: handler, named: name, before: HeadChannelHandler.name)
+            self.add(handler: handler, named: name, before: TailChannelHandler.name)
         } else {
-            return self.add(handler: handler, named: name, after: TailChannelHandler.name)
+            self.add(handler: handler, named: name, after: HeadChannelHandler.name)
         }
     }
     
-    /// Add a `ChannelHandler` to the `ChannelPipeline`.
-    public func add(handler: ChannelHandler, named name: String, after existing: String) -> Bool {
-        guard let context = self.find(context: existing) else {
-            return false
-        }
+    public func add(handler: ChannelHandler, named name: String, after existing: String, executor: DispatchQueue? = nil) {
         
-        self.add(context: ChannelHandlerContext(name: name, channel: self.channel, handler: handler), after: context)
-        return true
     }
     
-    /// Add a `ChannelHandler` to the `ChannelPipeline`.
-    public func add(handler: ChannelHandler, named name: String, before existing: String) -> Bool {
-        guard let context = self.find(context: existing) else {
-            return false
-        }
+    public func add(handler: ChannelHandler, named name: String, before existing: String, executor: DispatchQueue? = nil) {
         
-        self.add(context: ChannelHandlerContext(name: name, channel: self.channel, handler: handler), before: context)
-        return true
+    }
+    
+    private func add(context: ChannelHandlerContext, after existing: String, executor: DispatchQueue? = nil) {
+        self.executor.async { [weak self] in
+            
+        }
+    }
+    
+    private func add(context: ChannelHandlerContext, before existing: String, executor: DispatchQueue? = nil) {
+        self.executor.async { [weak self] in
+            
+        }
     }
 }
 
 extension ChannelPipeline {
-    private func add(context new: ChannelHandlerContext, after existing: ChannelHandlerContext) {
-        let next = existing.next
-        new.prev = existing
-        new.next = next
-        existing.next = new
-        next?.prev = new
-    }
-    
-    private func add(context new: ChannelHandlerContext, before existing: ChannelHandlerContext) {
-        let prev = existing.prev
-        new.prev = prev
-        new.next = existing
-        existing.prev = new
-        prev?.next = new
-    }
-}
-
-extension ChannelPipeline {
-    public func remove(name: String) {
-        
-    }
-    
-    public func remove(handler: ChannelHandler) {
-        
-    }
-}
-
-extension ChannelPipeline {
-    private func find(context named: String) -> ChannelHandlerContext? {
-        var current = self.head?.next
-        
-        while let context = current, context !== self.tail {
-            if context.name == named {
-                return context
-            } else {
-                current = context.next
-            }
+    public func remove(handler name: String) {
+        self.executor.async { [weak self] in
+            
         }
-        
-        return nil
+    }
+    
+    public func replace(handler name: String, with handler: ChannelHandler, named: String) {
+        self.executor.async { [weak self] in
+            
+        }
     }
 }
 
 extension ChannelPipeline: InboundChannelHandlerInvoker {
     public func fireChannelActive() {
-        self.head?.triggerChannelActive()
+        self._head?.fireChannelActive()
     }
     
     public func fireChannelInactive() {
-        self.head?.triggerChannelInactive()
+        self._head?.fireChannelInactive()
     }
     
-    public func fireErrorCaught(_ error: Error) {
-        self.head?.triggerErrorCaught(error)
+    public func fireChannelRead(_ data: Any) {
+        self._head?.fireChannelRead(data)
     }
     
-    public func fireChannelRead(_ message: Any) {
-        self.head?.triggerChannelRead(message)
+    public func fireError(_ error: Error) {
+        self._head?.fireError(error)
     }
 }
 
 extension ChannelPipeline: OutboundChannelHandlerInvoker {
+    public func close() {
+        self._tail?.close()
+    }
+    
     public func connect(to host: String, port: Int) {
-        self.tail?.connect(to: host, port: port)
+        self._tail?.connect(to: host, port: port)
     }
     
-    public func disconnect() {
-        self.tail?.disconnect()
-    }
-    
-    public func write(_ message: Any) {
-        self.tail?.write(message)
+    public func write(_ data: Any) {
+        self._tail?.write(data)
     }
 }
 
-private final class HeadChannelHandler: OutboundChannelHandler {
-    static let name: String = "head_pipeline_handler"
+fileprivate final class HeadChannelHandler: OutboundChannelHandler {
+    static let name: String = "pipeline_head_handler"
     
-    func channel(connect context: ChannelHandlerContext, to host: String, port: Int) {
-        context.channel.handle.connect(to: host, port: port)
+    func handler(close context: ChannelHandlerContext) throws {
+        try context.channel.socket.close()
     }
     
-    func channel(disconnect context: ChannelHandlerContext) {
-        context.channel.handle.disconnect()
+    func handler(connect context: ChannelHandlerContext, to host: String, port: Int) throws {
+        try context.channel.socket.connect(to: host, port: port)
     }
     
-    func channel(_ context: ChannelHandlerContext, write message: Any) {
-        guard let message = message as? ByteBuffer else {
-            print("Error: Message isn't in a byte form. Discarding...")
-            return
-        }
-        
-        context.channel.handle.write(message)
+    func handler(_ context: ChannelHandlerContext, write data: Any) throws {
+        try context.channel.socket.write(data: data)
     }
 }
 
-private final class TailChannelHandler: InboundChannelHandler {
-    static let name: String = "tail_pipeline_handler"
+fileprivate final class TailChannelHandler: InboundChannelHandler {
+    static let name: String = "pipeline_tail_handler"
     
-    func channel(active context: ChannelHandlerContext) {
-        // Discard event
+    func handler(_ context: ChannelHandlerContext, error: Error) throws {
+        print("[ERROR] -- An error event has reached the tail of the pipeline without being handled.")
+        print("[ERROR] -- \(String(describing: error))")
     }
     
-    func channel(inactive context: ChannelHandlerContext) {
-        // Discard event
-    }
-    
-    func channel(_ context: ChannelHandlerContext, error: Error) {
-        print("Caught unhandled error: \(error)")
-    }
-    
-    func channel(_ context: ChannelHandlerContext, read message: Any) {
+    func handler(_ context: ChannelHandlerContext, read data: Any) throws {
         // Discard event
     }
 }

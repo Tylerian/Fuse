@@ -66,6 +66,8 @@ int fs_byte_buffer_is_writable_by_length_at_offset(fs_byte_buffer_t* buffer, uin
     
 int fs_byte_buffer_set_capacity(fs_byte_buffer_t* buffer, int32_t capacity);
 
+/* --> Marking functions <-- */
+    
 /* --> Reading functions <-- */
 int fs_byte_buffer_get_int8    (fs_byte_buffer_t *buffer, uint32_t offset, int8_t  *out);
 int fs_byte_buffer_get_int16_be(fs_byte_buffer_t *buffer, uint32_t offset, int16_t *out);
@@ -105,6 +107,7 @@ int fs_byte_buffer_write_int32_le(fs_byte_buffer_t *buffer, int32_t value);
 int fs_byte_buffer_write_int64_be(fs_byte_buffer_t *buffer, int64_t value);
 int fs_byte_buffer_write_int64_le(fs_byte_buffer_t *buffer, int64_t value);
 int fs_byte_buffer_write_bytes   (fs_byte_buffer_t *buffer, const fs_byte_t *in);
+int fs_byte_buffer_write_buffer  (fs_byte_buffer_t *buffer, fs_byte_buffer_t *in);
 #ifdef __cplusplus
 }
 #endif
