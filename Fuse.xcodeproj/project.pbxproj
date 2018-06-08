@@ -49,7 +49,6 @@
 		57477A6420B30061007BC236 /* fs_byte_buffer_write_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */; };
 		57867BF720B575840004456A /* fs_byte_buffer_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF620B575840004456A /* fs_byte_buffer_resize.c */; };
 		57867C0920BC25080004456A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5786941520AF675E001F3DC6 /* Info.plist */; };
-		57867C7920BF5E340004456A /* FuseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C7820BF5E340004456A /* FuseTests.swift */; };
 		57867C7B20BF5E340004456A /* Fuse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5786941120AF675E001F3DC6 /* Fuse.framework */; };
 		57867C8120BF5E440004456A /* ChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C7020BF5DCB0004456A /* ChannelTests.swift */; };
 		57867C8320C1EFCF0004456A /* ByteBufTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8220C1EFCF0004456A /* ByteBufTests.swift */; };
@@ -60,13 +59,13 @@
 		57867CA120C6B8BE0004456A /* ChannelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CA020C6B8BE0004456A /* ChannelHandler.swift */; };
 		57867CA320C6B8CF0004456A /* ChannelHandlerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CA220C6B8CF0004456A /* ChannelHandlerContext.swift */; };
 		57867CA520C6B8E00004456A /* ChannelHandlerInvoker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CA420C6B8E00004456A /* ChannelHandlerInvoker.swift */; };
-		57867CA720C6BF100004456A /* ChannelOperationsExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CA620C6BF100004456A /* ChannelOperationsExecutor.swift */; };
 		57867CA920C82E460004456A /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CA820C82E460004456A /* Bootstrap.swift */; };
 		57867CAB20C8970B0004456A /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAA20C8970B0004456A /* ByteBuffer.swift */; };
 		57867CAD20C897840004456A /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAC20C897840004456A /* Endianness.swift */; };
 		57867CAF20C95DBE0004456A /* fs_byte_buffer_write_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAE20C95DBE0004456A /* fs_byte_buffer_write_buffer.c */; };
 		57867CB020C95DBE0004456A /* fs_byte_buffer_write_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAE20C95DBE0004456A /* fs_byte_buffer_write_buffer.c */; };
 		57867CB120C9654C0004456A /* fs_byte_buffer_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF620B575840004456A /* fs_byte_buffer_resize.c */; };
+		57867CB220CA0CB10004456A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57867C7A20BF5E340004456A /* Info.plist */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5786949C20B19398001F3DC6 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5786949D20B1939E001F3DC6 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -128,28 +127,18 @@
 		57477A3B20B2D92D007BC236 /* fs_byte_buffer_set_int64.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_int64.c; sourceTree = "<group>"; };
 		57477A3D20B2D942007BC236 /* fs_byte_buffer_get_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_get_bytes.c; sourceTree = "<group>"; };
 		57477A3F20B2D952007BC236 /* fs_byte_buffer_set_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_set_bytes.c; sourceTree = "<group>"; };
-		57477A6720B30874007BC236 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
-		57477A6920B3091E007BC236 /* ChannelPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPipeline.swift; sourceTree = "<group>"; };
-		57477A6C20B339F9007BC236 /* ChannelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandler.swift; sourceTree = "<group>"; };
-		57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerContext.swift; sourceTree = "<group>"; };
-		57477A7120B438B2007BC236 /* ByteBufferError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferError.swift; sourceTree = "<group>"; };
 		57867BF620B575840004456A /* fs_byte_buffer_resize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_resize.c; sourceTree = "<group>"; };
-		57867BF920BC20C70004456A /* ByteToMessageCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteToMessageCodec.swift; sourceTree = "<group>"; };
 		57867C7020BF5DCB0004456A /* ChannelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTests.swift; sourceTree = "<group>"; };
 		57867C7620BF5E340004456A /* FuseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FuseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		57867C7820BF5E340004456A /* FuseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuseTests.swift; sourceTree = "<group>"; };
 		57867C7A20BF5E340004456A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57867C8220C1EFCF0004456A /* ByteBufTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufTests.swift; sourceTree = "<group>"; };
-		57867C8420C41C980004456A /* ChannelHandlerInvoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerInvoker.swift; sourceTree = "<group>"; };
 		57867C8F20C597F80004456A /* ChannelHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerTests.swift; sourceTree = "<group>"; };
 		57867C9220C598100004456A /* ChannelPipelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPipelineTests.swift; sourceTree = "<group>"; };
-		57867C9420C6871D0004456A /* Synchronized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronized.swift; sourceTree = "<group>"; };
 		57867C9C20C6B83D0004456A /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		57867C9E20C6B87A0004456A /* ChannelPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelPipeline.swift; sourceTree = "<group>"; };
 		57867CA020C6B8BE0004456A /* ChannelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandler.swift; sourceTree = "<group>"; };
 		57867CA220C6B8CF0004456A /* ChannelHandlerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerContext.swift; sourceTree = "<group>"; };
 		57867CA420C6B8E00004456A /* ChannelHandlerInvoker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHandlerInvoker.swift; sourceTree = "<group>"; };
-		57867CA620C6BF100004456A /* ChannelOperationsExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelOperationsExecutor.swift; sourceTree = "<group>"; };
 		57867CA820C82E460004456A /* Bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootstrap.swift; sourceTree = "<group>"; };
 		57867CAA20C8970B0004456A /* ByteBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuffer.swift; sourceTree = "<group>"; };
 		57867CAC20C897840004456A /* Endianness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endianness.swift; sourceTree = "<group>"; };
@@ -157,8 +146,6 @@
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuffer.swift; sourceTree = "<group>"; };
-		5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBufferEndianness.swift; sourceTree = "<group>"; };
 		5786942120B01ED4001F3DC6 /* fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fuse.h; sourceTree = "<group>"; };
 		5786942220B01ED4001F3DC6 /* fs_byte_buffer_init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_init.c; sourceTree = "<group>"; };
 		5786942920B02AE9001F3DC6 /* fs_error.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_error.c; sourceTree = "<group>"; };
@@ -174,7 +161,6 @@
 		5786945B20B06A1D001F3DC6 /* fs_byte_buffer_free.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_free.c; sourceTree = "<group>"; };
 		5786945D20B06E21001F3DC6 /* fs_byte_buffer_is_readable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_is_readable.c; sourceTree = "<group>"; };
 		5786945F20B06E3B001F3DC6 /* fs_byte_buffer_is_writable.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_is_writable.c; sourceTree = "<group>"; };
-		5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "fs_byte_buffer_t+extensions.swift"; sourceTree = "<group>"; };
 		5786947620B17F0E001F3DC6 /* fs_byte_buffer_copy.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_copy.c; sourceTree = "<group>"; };
 		5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_bytes.c; sourceTree = "<group>"; };
 		5786947A20B180FF001F3DC6 /* fs_byte_buffer_read_bytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_read_bytes.c; sourceTree = "<group>"; };
@@ -218,53 +204,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		57477A6520B30847007BC236 /* Channels */ = {
-			isa = PBXGroup;
-			children = (
-				57477A6B20B339E7007BC236 /* Handlers */,
-				57477A6720B30874007BC236 /* Channel.swift */,
-				57477A6920B3091E007BC236 /* ChannelPipeline.swift */,
-			);
-			path = Channels;
-			sourceTree = "<group>";
-		};
-		57477A6B20B339E7007BC236 /* Handlers */ = {
-			isa = PBXGroup;
-			children = (
-				57867BF820B9A8BE0004456A /* Codecs */,
-				57477A6C20B339F9007BC236 /* ChannelHandler.swift */,
-				57867C8420C41C980004456A /* ChannelHandlerInvoker.swift */,
-				57477A6F20B33A18007BC236 /* ChannelHandlerContext.swift */,
-			);
-			path = Handlers;
-			sourceTree = "<group>";
-		};
-		57867BF820B9A8BE0004456A /* Codecs */ = {
-			isa = PBXGroup;
-			children = (
-				57867BF920BC20C70004456A /* ByteToMessageCodec.swift */,
-			);
-			path = Codecs;
-			sourceTree = "<group>";
-		};
 		57867C6E20BF5D900004456A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				57867C7A20BF5E340004456A /* Info.plist */,
 				57867C8220C1EFCF0004456A /* ByteBufTests.swift */,
 				57867C7020BF5DCB0004456A /* ChannelTests.swift */,
 				57867C8F20C597F80004456A /* ChannelHandlerTests.swift */,
 				57867C9220C598100004456A /* ChannelPipelineTests.swift */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		57867C7720BF5E340004456A /* FuseTests */ = {
-			isa = PBXGroup;
-			children = (
-				57867C7820BF5E340004456A /* FuseTests.swift */,
-				57867C7A20BF5E340004456A /* Info.plist */,
-			);
-			path = FuseTests;
 			sourceTree = "<group>";
 		};
 		57867C9820C6B80A0004456A /* Sources */ = {
@@ -287,7 +236,6 @@
 				57867CA020C6B8BE0004456A /* ChannelHandler.swift */,
 				57867CA420C6B8E00004456A /* ChannelHandlerInvoker.swift */,
 				57867CA220C6B8CF0004456A /* ChannelHandlerContext.swift */,
-				57867CA620C6BF100004456A /* ChannelOperationsExecutor.swift */,
 			);
 			path = Channels;
 			sourceTree = "<group>";
@@ -306,7 +254,6 @@
 			children = (
 				5786942620B02A51001F3DC6 /* C */,
 				5786942520B02A44001F3DC6 /* Swift */,
-				57867C7720BF5E340004456A /* FuseTests */,
 				5786941220AF675E001F3DC6 /* Products */,
 				5786946620B0F8F9001F3DC6 /* Frameworks */,
 			);
@@ -323,33 +270,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5786941320AF675E001F3DC6 /* Sources_ */ = {
-			isa = PBXGroup;
-			children = (
-				5786941C20AF6768001F3DC6 /* Buffers */,
-				57477A6520B30847007BC236 /* Channels */,
-				57867C9420C6871D0004456A /* Synchronized.swift */,
-			);
-			path = Sources_;
-			sourceTree = "<group>";
-		};
-		5786941C20AF6768001F3DC6 /* Buffers */ = {
-			isa = PBXGroup;
-			children = (
-				5786941D20AF67CF001F3DC6 /* ByteBuffer.swift */,
-				57477A7120B438B2007BC236 /* ByteBufferError.swift */,
-				5786941F20AF99D7001F3DC6 /* ByteBufferEndianness.swift */,
-				5786946820B0F952001F3DC6 /* fs_byte_buffer_t+extensions.swift */,
-			);
-			path = Buffers;
-			sourceTree = "<group>";
-		};
 		5786942520B02A44001F3DC6 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
 				57867C6E20BF5D900004456A /* Tests */,
 				57867C9820C6B80A0004456A /* Sources */,
-				5786941320AF675E001F3DC6 /* Sources_ */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -573,6 +498,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57867CB220CA0CB10004456A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +524,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57867C7920BF5E340004456A /* FuseTests.swift in Sources */,
 				57867C8120BF5E440004456A /* ChannelTests.swift in Sources */,
 				57867C9120C597FE0004456A /* ChannelHandlerTests.swift in Sources */,
 				57867C8320C1EFCF0004456A /* ByteBufTests.swift in Sources */,
@@ -615,7 +540,6 @@
 				57867CA120C6B8BE0004456A /* ChannelHandler.swift in Sources */,
 				57867C9D20C6B83D0004456A /* Channel.swift in Sources */,
 				57867CAD20C897840004456A /* Endianness.swift in Sources */,
-				57867CA720C6BF100004456A /* ChannelOperationsExecutor.swift in Sources */,
 				57867CA320C6B8CF0004456A /* ChannelHandlerContext.swift in Sources */,
 				57867C9F20C6B87A0004456A /* ChannelPipeline.swift in Sources */,
 				57867CA520C6B8E00004456A /* ChannelHandlerInvoker.swift in Sources */,
@@ -714,7 +638,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4FPK9XX5W;
-				INFOPLIST_FILE = FuseTests/Info.plist;
+				INFOPLIST_FILE = Swift/Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -733,7 +657,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4FPK9XX5W;
-				INFOPLIST_FILE = FuseTests/Info.plist;
+				INFOPLIST_FILE = Swift/Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
