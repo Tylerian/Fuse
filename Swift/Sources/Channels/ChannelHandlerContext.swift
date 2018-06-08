@@ -36,6 +36,10 @@ extension ChannelHandlerContext {
 }
 
 extension ChannelHandlerContext {
+    internal var handler: ChannelHandler {
+        return self._handler
+    }
+    
     internal var executor: DispatchQueue {
         return self._executor
     }

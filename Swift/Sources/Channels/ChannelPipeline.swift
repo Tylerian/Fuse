@@ -90,46 +90,142 @@ extension ChannelPipeline {
 }
 
 extension ChannelPipeline {
-    public func add(handler: ChannelHandler, named name: String, first: Bool = false, executor: DispatchQueue? = nil) {
+    public func add(handler: ChannelHandler, named name: String, first: Bool = false, executor: DispatchQueue? = nil) throws {
         if first {
-            self.add(handler: handler, named: name, before: TailChannelHandler.name)
+            try self.add(handler: handler, named: name, before: TailChannelHandler.name)
         } else {
-            self.add(handler: handler, named: name, after: HeadChannelHandler.name)
+            try self.add(handler: handler, named: name, after: HeadChannelHandler.name)
         }
     }
     
-    public func add(handler: ChannelHandler, named name: String, after existing: String, executor: DispatchQueue? = nil) {
-        
-    }
-    
-    public func add(handler: ChannelHandler, named name: String, before existing: String, executor: DispatchQueue? = nil) {
-        
-    }
-    
-    private func add(context: ChannelHandlerContext, after existing: String, executor: DispatchQueue? = nil) {
-        self.executor.async { [weak self] in
+    public func add(handler: ChannelHandler, named name: String, after existing: String, executor: DispatchQueue? = nil) throws {
+        try self.executor.sync { [weak self] in
+            guard let this = self else {
+                return
+            }
             
+            guard check(duplicity: name) else {
+                throw ChannelPipelineError.handlerNameAlreadyExists
+            }
+            
+            guard let nextctx = this.find(context: existing) else {
+                throw ChannelPipelineError.contextNotFound(name: existing)
+            }
+            
+            let context = ChannelHandlerContext(name: name, handler: handler, executor: executor ?? this.executor, pipeline: this)
+            
+            this.add(context: context, after: nextctx)
         }
     }
     
-    private func add(context: ChannelHandlerContext, before existing: String, executor: DispatchQueue? = nil) {
-        self.executor.async { [weak self] in
+    public func add(handler: ChannelHandler, named name: String, before existing: String, executor: DispatchQueue? = nil) throws {
+        try self.executor.sync { [weak self] in
+            guard let this = self else {
+                return
+            }
             
+            guard check(duplicity: name) else {
+                throw ChannelPipelineError.handlerNameAlreadyExists
+            }
+            
+            guard let prevctx = this.find(context: existing) else {
+                throw ChannelPipelineError.contextNotFound(name: existing)
+            }
+            
+            let context = ChannelHandlerContext(name: name, handler: handler, executor: executor ?? this.executor, pipeline: this)
+            
+            this.add(context: context, before: prevctx)
         }
+    }
+    
+    private func add(context: ChannelHandlerContext, after existing: ChannelHandlerContext) {
+        context.prev = existing;
+        context.next = existing.next;
+        existing.next?.prev = context;
+        existing.next = context;
+    }
+    
+    private func add(context: ChannelHandlerContext, before existing: ChannelHandlerContext) {
+        context.prev = existing.prev;
+        context.next = existing;
+        existing.prev?.next = context;
+        existing.prev = context;
+    }
+    
+    private func check(duplicity name: String) -> Bool {
+        var nxt = self._head?.next
+        
+        while let ctx = nxt, ctx !== self._tail {
+            if ctx.name == name {
+                return true
+            }
+            
+            nxt = ctx.next
+        }
+        
+        return false
+    }
+    
+    private func find(context name: String) -> ChannelHandlerContext? {
+        var nxt = self._head?.next
+        
+        while let ctx = nxt, ctx !== self._tail {
+            if ctx.name == name {
+                return ctx
+            }
+            
+            nxt = ctx.next
+        }
+        
+        return nil
     }
 }
 
 extension ChannelPipeline {
-    public func remove(handler name: String) {
-        self.executor.async { [weak self] in
-            
+    public func remove(handler name: String) throws {
+        guard name != self._head?.name,
+              name != self._tail?.name else {
+            return
         }
+        
+        guard let ctx = self.find(context: name) else {
+            throw ChannelPipelineError.contextNotFound(name: name)
+        }
+        
+        try self.remove(handler: ctx.handler)
+    }
+    
+    public func remove(handler: ChannelHandler) throws {
+        
     }
     
     public func replace(handler name: String, with handler: ChannelHandler, named: String) {
-        self.executor.async { [weak self] in
-            
-        }
+        
+    }
+    
+    private func remove(context: ChannelHandlerContext) {
+        let prev = context.prev
+        let next = context.next
+        
+        prev?.next = next
+        next?.prev = prev
+        
+        // Break refernce cycles
+        context.next = nil
+        context.prev = nil
+    }
+    
+    private func replace(context oldctx: ChannelHandlerContext, with newctx: ChannelHandlerContext) {
+        let prev = oldctx.prev
+        let next = oldctx.next
+        
+        prev?.next = newctx
+        next?.prev = newctx
+        
+        // update the reference to the replacement so
+        // forward of buffered content will work correctly
+        oldctx.prev = newctx
+        oldctx.next = newctx
     }
 }
 
@@ -163,6 +259,11 @@ extension ChannelPipeline: OutboundChannelHandlerInvoker {
     public func write(_ data: Any) {
         self._tail?.write(data)
     }
+}
+
+public enum ChannelPipelineError: Error {
+    case handlerNameAlreadyExists
+    case contextNotFound(name: String)
 }
 
 fileprivate final class HeadChannelHandler: OutboundChannelHandler {
