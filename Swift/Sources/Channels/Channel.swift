@@ -22,6 +22,17 @@ extension Channel {
     }
 }
 
+extension Channel {
+    public func close() {
+        self.pipeline.close()
+    }
+        
+    public func write(_ data: Any) -> Channel {
+        self.pipeline.write(data)
+        return self
+    }
+}
+
 extension Channel: SocketDelegate {
     internal func socket(opened socket: Socket) {
         self.pipeline.fireChannelActive()
@@ -139,33 +150,6 @@ extension TCPSocket {
     }
 }
 
-extension TCPSocket: StreamDelegate {
-    public func stream(_ stream: Stream, handle event: Stream.Event) {
-        do {
-            switch (stream, event) {
-            case(_output, .openCompleted):
-                self._delegate?.socket(opened: self)
-                break
-            case(_, .errorOccurred):
-                throw SocketError.ioError(stream.streamError)
-            case (_, .endEncountered):
-                self._delegate?.socket(closed: self)
-                break
-            case (_input, .hasBytesAvailable):
-                try self.read()
-                break
-            case (_output, .hasSpaceAvailable):
-                try self.write()
-                break
-            default:
-                break
-            }
-        } catch let error {
-            self._delegate?.socket(self, hasCaughtError: error)
-        }
-    }
-}
-
 extension TCPSocket {
     internal func read() throws {
         guard let input = self._input else {
@@ -219,6 +203,33 @@ extension TCPSocket {
             self._sndbuf.readerIndex += written
         } else if written == -1 {
             throw SocketError.ioError(output.streamError)
+        }
+    }
+}
+
+extension TCPSocket: StreamDelegate {
+    public func stream(_ stream: Stream, handle event: Stream.Event) {
+        do {
+            switch (stream, event) {
+            case(_output, .openCompleted):
+                self._delegate?.socket(opened: self)
+                break
+            case(_, .errorOccurred):
+                throw SocketError.ioError(stream.streamError)
+            case (_, .endEncountered):
+                self._delegate?.socket(closed: self)
+                break
+            case (_input, .hasBytesAvailable):
+                try self.read()
+                break
+            case (_output, .hasSpaceAvailable):
+                try self.write()
+                break
+            default:
+                break
+            }
+        } catch let error {
+            self._delegate?.socket(self, hasCaughtError: error)
         }
     }
 }
