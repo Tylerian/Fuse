@@ -97,7 +97,7 @@ int fs_byte_buffer_set_int32_be(fs_byte_buffer_t *buffer, uint32_t offset, int32
 int fs_byte_buffer_set_int32_le(fs_byte_buffer_t *buffer, uint32_t offset, int32_t value);
 int fs_byte_buffer_set_int64_be(fs_byte_buffer_t *buffer, uint32_t offset, int64_t value);
 int fs_byte_buffer_set_int64_le(fs_byte_buffer_t *buffer, uint32_t offset, int64_t value);
-int fs_byte_buffer_set_bytes   (fs_byte_buffer_t *buffer, uint32_t offset, const fs_byte_t *in);
+int fs_byte_buffer_set_bytes   (fs_byte_buffer_t *buffer, uint32_t length, uint32_t offset, const fs_byte_t *in);
 
 int fs_byte_buffer_write_int8    (fs_byte_buffer_t *buffer, int8_t  value);
 int fs_byte_buffer_write_int16_be(fs_byte_buffer_t *buffer, int16_t value);
@@ -106,8 +106,7 @@ int fs_byte_buffer_write_int32_be(fs_byte_buffer_t *buffer, int32_t value);
 int fs_byte_buffer_write_int32_le(fs_byte_buffer_t *buffer, int32_t value);
 int fs_byte_buffer_write_int64_be(fs_byte_buffer_t *buffer, int64_t value);
 int fs_byte_buffer_write_int64_le(fs_byte_buffer_t *buffer, int64_t value);
-int fs_byte_buffer_write_bytes   (fs_byte_buffer_t *buffer, const fs_byte_t *in);
-int fs_byte_buffer_write_buffer  (fs_byte_buffer_t *buffer, fs_byte_buffer_t *in);
+int fs_byte_buffer_write_bytes   (fs_byte_buffer_t *buffer, uint32_t length, const fs_byte_t *in);
 #ifdef __cplusplus
 }
 #endif

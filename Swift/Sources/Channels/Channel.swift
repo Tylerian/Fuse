@@ -1,12 +1,18 @@
 import Foundation
 
 public final class Channel {
-    private let _socket: Socket
+    private var _socket: Socket!
     private var _pipeline: ChannelPipeline!
     
-    internal init(socket factory: () -> Socket) {
-        self._socket   = factory()
+    internal init(socket factory: (Channel) -> Socket) {
         self._pipeline = ChannelPipeline(channel: self)
+        self._socket   = factory(self)
+    }
+}
+
+extension Channel {
+    public var pipeline: ChannelPipeline {
+        return self._pipeline
     }
 }
 
@@ -14,34 +20,28 @@ extension Channel {
     internal var socket: Socket {
         return self._socket
     }
-    
-    internal var pipeline: ChannelPipeline {
-        return self._pipeline
-    }
 }
 
 extension Channel: SocketDelegate {
-    public func socket(opened socket: Socket) {
+    internal func socket(opened socket: Socket) {
         self.pipeline.fireChannelActive()
     }
     
-    public func socket(closed socket: Socket) {
+    internal func socket(closed socket: Socket) {
         self.pipeline.fireChannelInactive()
     }
     
-    public func socket(_ socket: Socket, hasCaughtError error: Error) {
+    internal func socket(_ socket: Socket, hasCaughtError error: Error) {
         self.pipeline.fireError(error)
     }
     
-    public func socket(_ socket: Socket, hasBytesAvailable bytes: ArraySlice<UInt8>) {
+    internal func socket(_ socket: Socket, hasBytesAvailable bytes: ArraySlice<UInt8>) {
         self.pipeline.fireChannelRead(bytes)
     }
 }
 
-public protocol Socket: class {
+internal protocol Socket: class {
     var delegate: SocketDelegate? { get set }
-    
-    init()
     
     func close() throws
     func connect(to host: String, port: Int) throws
@@ -50,7 +50,7 @@ public protocol Socket: class {
     func write(data: Any) throws
 }
 
-public protocol SocketDelegate: class {
+internal protocol SocketDelegate: class {
     func socket(opened socket: Socket)
     func socket(closed socket: Socket)
     
@@ -58,16 +58,22 @@ public protocol SocketDelegate: class {
     func socket(_ socket: Socket, hasBytesAvailable bytes: ArraySlice<UInt8>)
 }
 
-public final class TCPSocket: NSObject, Socket {
+internal final class TCPSocket: NSObject, Socket {
     private var _direct: Bool
     private var _rcvbuf: [UInt8]
     private var _sndbuf: ByteBuffer
     
+    unowned
+    private let _queue: DispatchQueue
+    
     private var _input:  InputStream?
     private var _output: OutputStream?
+    
+    weak
     private var _delegate: SocketDelegate?
     
-    public required override init() {
+    internal required init(queue: DispatchQueue) {
+        self._queue  = queue
         self._direct = false
         self._rcvbuf = [UInt8](repeating: 0,
                count: kDefaultRcvBufferCapacity)
@@ -77,7 +83,7 @@ public final class TCPSocket: NSObject, Socket {
 }
 
 extension TCPSocket {
-    public var delegate: SocketDelegate? {
+    internal var delegate: SocketDelegate? {
         get {
             return self._delegate
         }
@@ -88,7 +94,7 @@ extension TCPSocket {
 }
 
 extension TCPSocket {
-    public func close() throws {
+    internal func close() throws {
         guard let input = self._input, let output = self._output else {
             throw ChannelError.failedToGetStreams
         }
@@ -101,11 +107,11 @@ extension TCPSocket {
         input.close()
         output.close()
         
-        input.remove(from: .current, forMode: .defaultRunLoopMode)
-        output.remove(from: .current, forMode: .defaultRunLoopMode)
+        CFReadStreamSetDispatchQueue (self._input,  nil)
+        CFWriteStreamSetDispatchQueue(self._output, nil)
     }
     
-    public func connect(to host: String, port: Int) throws {
+    internal func connect(to host: String, port: Int) throws {
         Stream.getStreamsToHost(
             withName: host, port: port,
             inputStream: &self._input, outputStream: &self._output)
@@ -114,16 +120,54 @@ extension TCPSocket {
             throw ChannelError.failedToGetStreams
         }
         
-        input .schedule(in: .current, forMode: .defaultRunLoopMode)
-        output.schedule(in: .current, forMode: .defaultRunLoopMode)
+        if input.streamStatus == .open, output.streamStatus == .open {
+            throw ChannelError.alreadyConnected
+        }
+        
+        if output.streamStatus == .opening, output.streamStatus == .opening {
+            throw ChannelError.alreadyConnecting
+        }
+        
+        input.delegate = self
+        output.delegate = self
+        
+        CFReadStreamSetDispatchQueue (self._input,  self._queue)
+        CFWriteStreamSetDispatchQueue(self._output, self._queue)
         
         input .open()
         output.open()
     }
 }
 
+extension TCPSocket: StreamDelegate {
+    public func stream(_ stream: Stream, handle event: Stream.Event) {
+        do {
+            switch (stream, event) {
+            case(_output, .openCompleted):
+                self._delegate?.socket(opened: self)
+                break
+            case(_, .errorOccurred):
+                throw SocketError.ioError(stream.streamError)
+            case (_, .endEncountered):
+                self._delegate?.socket(closed: self)
+                break
+            case (_input, .hasBytesAvailable):
+                try self.read()
+                break
+            case (_output, .hasSpaceAvailable):
+                try self.write()
+                break
+            default:
+                break
+            }
+        } catch let error {
+            self._delegate?.socket(self, hasCaughtError: error)
+        }
+    }
+}
+
 extension TCPSocket {
-    public func read() throws {
+    internal func read() throws {
         guard let input = self._input else {
             throw SocketError.notInitialized
         }
@@ -139,7 +183,7 @@ extension TCPSocket {
 }
 
 extension TCPSocket {
-    public func write(data: Any) throws {
+    internal func write(data: Any) throws {
         guard let buffer = data as? ByteBuffer else {
             throw SocketError.notSupportedOutboundDataType
         }
@@ -153,11 +197,11 @@ extension TCPSocket {
         _ = self._sndbuf.write(bytes: buffer)
         
         if self._direct {
-            try self.write(data: self._sndbuf)
+            try self.write()
         }
     }
 
-    public func write(data: ByteBuffer) throws {
+    internal func write() throws {
         guard let output = self._output else {
             throw SocketError.notInitialized
         }
@@ -167,7 +211,8 @@ extension TCPSocket {
             return
         }
         
-        let written = output.write(self._sndbuf.unsafe + self._sndbuf.readerIndex, maxLength: self._sndbuf.readableBytes)
+        let sndsize = self._sndbuf.readableBytes >= kDefaultSndBufferPageSize ? kDefaultSndBufferPageSize : self._sndbuf.readableBytes
+        let written = output.write(self._sndbuf.unsafe + self._sndbuf.readerIndex, maxLength: sndsize)
         
         if written > 0 {
             self._direct = false
@@ -178,36 +223,11 @@ extension TCPSocket {
     }
 }
 
-extension TCPSocket: StreamDelegate {
-    public func stream(_ stream: Stream, handle event: Stream.Event) {
-        do {
-            switch (stream, event) {
-            case(_, .openCompleted):
-                self._delegate?.socket(opened: self)
-                break
-            case(_, .errorOccurred):
-                throw SocketError.ioError(stream.streamError)
-            case (_, .endEncountered):
-                self._delegate?.socket(closed: self)
-                break
-            case (_input, .hasBytesAvailable):
-                try self.read()
-                break
-            case (_output, .hasSpaceAvailable):
-                try self.write(data: self._sndbuf)
-                break
-            default:
-                break
-            }
-        } catch let error {
-            self._delegate?.socket(self, hasCaughtError: error)
-        }
-    }
-}
-
 public enum ChannelError: Error {
     case failedToGetStreams
     case alreadyClosed
+    case alreadyConnected
+    case alreadyConnecting
 }
 
 public enum SocketError: Error {
@@ -219,3 +239,4 @@ public enum SocketError: Error {
 
 fileprivate let kDefaultRcvBufferCapacity: Int = 1024
 fileprivate let kDefaultSndBufferCapacity: Int = 4096
+fileprivate let kDefaultSndBufferPageSize: Int = 512

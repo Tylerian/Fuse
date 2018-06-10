@@ -55,6 +55,7 @@ public protocol ByteBufferWritable {
     mutating func write(int32 value: Int32, endianness: Endianness) -> Self
     mutating func write(int64 value: Int64, endianness: Endianness) -> Self
     mutating func write(bytes value: [UInt8]) -> Self
+    mutating func write(bytes value: ByteBuffer) -> Self
 }
 
 internal final class UnsafeByteBuffer: ByteBuffer {
@@ -145,7 +146,8 @@ extension UnsafeByteBuffer: ByteBufferReadable {
             self.readerIndex = 0
             self.writerIndex = 0
         } else {
-            self.set(bytes: self, at: 0)
+            // TODO: Use memmove cuz superposed bytes!!
+            _ = self.set(bytes: self, at: 0, length: self.writerIndex)
             self.writerIndex -= self.readerIndex
             self.readerIndex  = 0
         }
@@ -400,11 +402,22 @@ extension UnsafeByteBuffer: ByteBufferWritable {
     }
     
     public func set(bytes value: [UInt8], at offset: Int) -> Self {
-        let result = fs_byte_buffer_set_bytes(&self.handle, UInt32(offset), value)
+        let result = fs_byte_buffer_set_bytes(&self.handle, UInt32(value.count), UInt32(offset), value)
         
         guard result == FS_OKAY else {
             let message = String(cString: fs_error_to_string(result))
-            fatalError("Fatal error while setting Int64 to byte buffer. Reason: \(message)")
+            fatalError("Fatal error while setting [UInt8] to byte buffer. Reason: \(message)")
+        }
+        
+        return self
+    }
+    
+    public func set(bytes value: ByteBuffer, at offset: Int, length: Int) -> Self {
+        let result = fs_byte_buffer_set_bytes(&self.handle, UInt32(length), UInt32(offset), value.unsafe)
+        
+        guard result == FS_OKAY else {
+            let message = String(cString: fs_error_to_string(result))
+            fatalError("Fatal error while setting ByteBuffer to byte buffer. Reason: \(message)")
         }
         
         return self
@@ -473,7 +486,18 @@ extension UnsafeByteBuffer: ByteBufferWritable {
     }
     
     public func write(bytes value: [UInt8]) -> Self {
-        let result = fs_byte_buffer_write_bytes(&self.handle, value)
+        let result = fs_byte_buffer_write_bytes(&self.handle, UInt32(value.count), value)
+        
+        guard result == FS_OKAY else {
+            let message = String(cString: fs_error_to_string(result))
+            fatalError("Fatal error while writing [UInt8] to byte buffer. Reason: \(message)")
+        }
+        
+        return self
+    }
+    
+    public func write(bytes value: ByteBuffer) -> Self {
+        let result = fs_byte_buffer_write_bytes(&self.handle, UInt32(value.writerIndex), value.unsafe)
         
         guard result == FS_OKAY else {
             let message = String(cString: fs_error_to_string(result))

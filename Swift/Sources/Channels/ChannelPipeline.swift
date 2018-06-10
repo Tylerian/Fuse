@@ -51,7 +51,6 @@ public final class ChannelPipeline {
     init(channel: Channel) {
         self._channel  = channel
         self._executor = DispatchQueue(label: "io.fuse.pipeline.executor")
-        
         self._head = ChannelHandlerContext(name: "pipeline_head_handler", handler: HeadChannelHandler(), executor: self._executor, pipeline: self)
         self._tail = ChannelHandlerContext(name: "pipeline_tail_handler", handler: TailChannelHandler(), executor: self._executor, pipeline: self)
         
@@ -104,11 +103,11 @@ extension ChannelPipeline {
                 return
             }
             
-            guard check(duplicity: name) else {
+            if check(duplicity: name) {
                 throw ChannelPipelineError.handlerNameAlreadyExists
             }
             
-            guard let nextctx = this.find(context: existing) else {
+            guard let nextctx = this.find(context: existing, unsafe: true) else {
                 throw ChannelPipelineError.contextNotFound(name: existing)
             }
             
@@ -124,11 +123,11 @@ extension ChannelPipeline {
                 return
             }
             
-            guard check(duplicity: name) else {
+            if check(duplicity: name) {
                 throw ChannelPipelineError.handlerNameAlreadyExists
             }
             
-            guard let prevctx = this.find(context: existing) else {
+            guard let prevctx = this.find(context: existing, unsafe: true) else {
                 throw ChannelPipelineError.contextNotFound(name: existing)
             }
             
@@ -139,6 +138,7 @@ extension ChannelPipeline {
     }
     
     private func add(context: ChannelHandlerContext, after existing: ChannelHandlerContext) {
+        print("Adding context #\(context.name) after #\(existing.name)")
         context.prev = existing;
         context.next = existing.next;
         existing.next?.prev = context;
@@ -153,9 +153,9 @@ extension ChannelPipeline {
     }
     
     private func check(duplicity name: String) -> Bool {
-        var nxt = self._head?.next
+        var nxt = self._head
         
-        while let ctx = nxt, ctx !== self._tail {
+        while let ctx = nxt {
             if ctx.name == name {
                 return true
             }
@@ -166,10 +166,10 @@ extension ChannelPipeline {
         return false
     }
     
-    private func find(context name: String) -> ChannelHandlerContext? {
-        var nxt = self._head?.next
+    private func find(context name: String, unsafe: Bool = false) -> ChannelHandlerContext? {
+        var nxt = unsafe ? self._head : self._head?.next
         
-        while let ctx = nxt, ctx !== self._tail {
+        while let ctx = nxt, unsafe && ctx !== self._tail {
             if ctx.name == name {
                 return ctx
             }
@@ -231,6 +231,7 @@ extension ChannelPipeline {
 
 extension ChannelPipeline: InboundChannelHandlerInvoker {
     public func fireChannelActive() {
+        print("Pipeline -> Firing channel active event")
         self._head?.fireChannelActive()
     }
     
@@ -269,15 +270,15 @@ public enum ChannelPipelineError: Error {
 fileprivate final class HeadChannelHandler: OutboundChannelHandler {
     static let name: String = "pipeline_head_handler"
     
-    func handler(close context: ChannelHandlerContext) throws {
+    func channel(close context: ChannelHandlerContext) throws {
         try context.channel.socket.close()
     }
     
-    func handler(connect context: ChannelHandlerContext, to host: String, port: Int) throws {
+    func channel(connect context: ChannelHandlerContext, to host: String, port: Int) throws {
         try context.channel.socket.connect(to: host, port: port)
     }
     
-    func handler(_ context: ChannelHandlerContext, write data: Any) throws {
+    func channel(_ context: ChannelHandlerContext, write data: Any) throws {
         try context.channel.socket.write(data: data)
     }
 }

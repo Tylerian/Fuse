@@ -62,8 +62,6 @@
 		57867CA920C82E460004456A /* Bootstrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CA820C82E460004456A /* Bootstrap.swift */; };
 		57867CAB20C8970B0004456A /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAA20C8970B0004456A /* ByteBuffer.swift */; };
 		57867CAD20C897840004456A /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAC20C897840004456A /* Endianness.swift */; };
-		57867CAF20C95DBE0004456A /* fs_byte_buffer_write_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAE20C95DBE0004456A /* fs_byte_buffer_write_buffer.c */; };
-		57867CB020C95DBE0004456A /* fs_byte_buffer_write_buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAE20C95DBE0004456A /* fs_byte_buffer_write_buffer.c */; };
 		57867CB120C9654C0004456A /* fs_byte_buffer_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF620B575840004456A /* fs_byte_buffer_resize.c */; };
 		57867CB220CA0CB10004456A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57867C7A20BF5E340004456A /* Info.plist */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -142,7 +140,6 @@
 		57867CA820C82E460004456A /* Bootstrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bootstrap.swift; sourceTree = "<group>"; };
 		57867CAA20C8970B0004456A /* ByteBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByteBuffer.swift; sourceTree = "<group>"; };
 		57867CAC20C897840004456A /* Endianness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endianness.swift; sourceTree = "<group>"; };
-		57867CAE20C95DBE0004456A /* fs_byte_buffer_write_buffer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = fs_byte_buffer_write_buffer.c; sourceTree = "<group>"; };
 		5786941120AF675E001F3DC6 /* Fuse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fuse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5786941420AF675E001F3DC6 /* Fuse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fuse.h; sourceTree = "<group>"; };
 		5786941520AF675E001F3DC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -320,7 +317,6 @@
 				5786943B20B04E60001F3DC6 /* fs_byte_buffer_write_int32.c */,
 				5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */,
 				5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */,
-				57867CAE20C95DBE0004456A /* fs_byte_buffer_write_buffer.c */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -560,7 +556,6 @@
 				57477A6320B30061007BC236 /* fs_byte_buffer_write_int64.c in Sources */,
 				57477A6020B30061007BC236 /* fs_byte_buffer_write_int8.c in Sources */,
 				57477A5220B30061007BC236 /* fs_byte_buffer_get_int64.c in Sources */,
-				57867CB020C95DBE0004456A /* fs_byte_buffer_write_buffer.c in Sources */,
 				57477A5420B30061007BC236 /* fs_byte_buffer_is_readable.c in Sources */,
 				57477A6120B30061007BC236 /* fs_byte_buffer_write_int16.c in Sources */,
 				57477A5520B30061007BC236 /* fs_byte_buffer_is_writable.c in Sources */,
@@ -587,7 +582,6 @@
 			files = (
 				578694AB20B19408001F3DC6 /* fs_error.c in Sources */,
 				57477A3220B2D8E3007BC236 /* fs_byte_buffer_get_int16.c in Sources */,
-				57867CAF20C95DBE0004456A /* fs_byte_buffer_write_buffer.c in Sources */,
 				57477A3820B2D90B007BC236 /* fs_byte_buffer_set_int32.c in Sources */,
 				578694AC20B19408001F3DC6 /* fs_byte_buffer_init.c in Sources */,
 				578694AD20B19408001F3DC6 /* fs_byte_buffer_free.c in Sources */,

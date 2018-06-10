@@ -86,20 +86,24 @@ extension ChannelHandlerContext: InboundChannelHandlerInvoker {
 extension ChannelHandlerContext {
     private func triggerChannelActive() {
         let cast = self._handler as? InboundChannelHandler
-        
+        print ("triggering channelActive event in context #\(self.name)")
         guard let handler = cast else {
             self.fireChannelActive()
             return
         }
         
+        print ("triggering channelActive event 1")
         self.executor.async(flags: .barrier) { [weak self] in
             guard let ctx = self else {
                 return
             }
+            print ("triggering channelActive event 2")
             
             do {
+                print ("triggering channelActive event 3")
                 try handler.channel(active: ctx)
             } catch let error {
+                print ("triggering channelActive event 4")
                 ctx.triggerError(error)
             }
         }

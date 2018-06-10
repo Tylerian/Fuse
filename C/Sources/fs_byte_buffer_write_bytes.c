@@ -8,17 +8,15 @@
 
 #include "fuse_private.h"
 
-int fs_byte_buffer_write_bytes(fs_byte_buffer_t *buffer, const fs_byte_t *in)
+int fs_byte_buffer_write_bytes(fs_byte_buffer_t *buffer, uint32_t length, const fs_byte_t *in)
 {
     /* get current writer pos */
     int offset = buffer->writer_index;
     
-    int result = fs_byte_buffer_set_bytes(buffer, offset, in);
+    int result = fs_byte_buffer_set_bytes(buffer, length, offset, in);
     
     if (result == FS_OKAY)
     {
-        int length = sizeof(in) / sizeof(fs_byte_t);
-        
         /* increase reader pos by length */
         buffer->writer_index += length;
     }

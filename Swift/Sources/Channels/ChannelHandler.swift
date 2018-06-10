@@ -63,7 +63,7 @@ extension OutboundChannelHandler {
         // Broadcast event to next handler in pipeline
         context.connect(to: host, port: port)
     }
-    
+ 
     public func channel(_ context: ChannelHandlerContext, write data: Any) throws {
         // Broadcast event to next handler in pipeline
         context.write(data)

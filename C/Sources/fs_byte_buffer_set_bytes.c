@@ -7,12 +7,8 @@
 //
 
 #include "fuse_private.h"
-
-int fs_byte_buffer_set_bytes(fs_byte_buffer_t *buffer, uint32_t offset, const fs_byte_t *in)
+int fs_byte_buffer_set_bytes(fs_byte_buffer_t *buffer, uint32_t length, uint32_t offset, const fs_byte_t *in)
 {
-    /* calculate input size */
-    int length = sizeof(in) / sizeof(fs_byte_t);
-    
     /* src must be writable */
     int is_writable = fs_byte_buffer_is_writable_by_length_at_offset(buffer, length, offset);
     
