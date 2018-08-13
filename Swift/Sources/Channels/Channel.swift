@@ -1,18 +1,14 @@
 import Foundation
 
+typealias SocketFactory = (Channel) -> Socket
+
 public final class Channel {
     private var _socket: Socket!
     private var _pipeline: ChannelPipeline!
     
-    internal init(socket factory: (Channel) -> Socket) {
+    internal init(socket factory: SocketFactory) {
         self._pipeline = ChannelPipeline(channel: self)
         self._socket   = factory(self)
-    }
-}
-
-extension Channel {
-    public var pipeline: ChannelPipeline {
-        return self._pipeline
     }
 }
 
@@ -23,10 +19,16 @@ extension Channel {
 }
 
 extension Channel {
+    public var pipeline: ChannelPipeline {
+        return self._pipeline
+    }
+}
+
+extension Channel {
     public func close() {
         self.pipeline.close()
     }
-        
+    
     public func write(_ data: Any) -> Channel {
         self.pipeline.write(data)
         return self
@@ -53,6 +55,8 @@ extension Channel: SocketDelegate {
 
 internal protocol Socket: class {
     var delegate: SocketDelegate? { get set }
+    
+    init(queue: DispatchQueue)
     
     func close() throws
     func connect(to host: String, port: Int) throws

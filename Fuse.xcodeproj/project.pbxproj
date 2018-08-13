@@ -48,7 +48,6 @@
 		57477A6320B30061007BC236 /* fs_byte_buffer_write_int64.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786943D20B04E71001F3DC6 /* fs_byte_buffer_write_int64.c */; };
 		57477A6420B30061007BC236 /* fs_byte_buffer_write_bytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 5786947820B180EB001F3DC6 /* fs_byte_buffer_write_bytes.c */; };
 		57867BF720B575840004456A /* fs_byte_buffer_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF620B575840004456A /* fs_byte_buffer_resize.c */; };
-		57867C0920BC25080004456A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5786941520AF675E001F3DC6 /* Info.plist */; };
 		57867C7B20BF5E340004456A /* Fuse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5786941120AF675E001F3DC6 /* Fuse.framework */; };
 		57867C8120BF5E440004456A /* ChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C7020BF5DCB0004456A /* ChannelTests.swift */; };
 		57867C8320C1EFCF0004456A /* ByteBufTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867C8220C1EFCF0004456A /* ByteBufTests.swift */; };
@@ -63,7 +62,6 @@
 		57867CAB20C8970B0004456A /* ByteBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAA20C8970B0004456A /* ByteBuffer.swift */; };
 		57867CAD20C897840004456A /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57867CAC20C897840004456A /* Endianness.swift */; };
 		57867CB120C9654C0004456A /* fs_byte_buffer_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 57867BF620B575840004456A /* fs_byte_buffer_resize.c */; };
-		57867CB220CA0CB10004456A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 57867C7A20BF5E340004456A /* Info.plist */; };
 		5786941620AF675E001F3DC6 /* Fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786941420AF675E001F3DC6 /* Fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5786949C20B19398001F3DC6 /* fuse_private.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942B20B04C39001F3DC6 /* fuse_private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		5786949D20B1939E001F3DC6 /* fuse.h in Headers */ = {isa = PBXBuildFile; fileRef = 5786942120B01ED4001F3DC6 /* fuse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -450,7 +448,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Tylerian;
 				TargetAttributes = {
 					57867C7520BF5E340004456A = {
@@ -494,7 +492,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57867CB220CA0CB10004456A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +499,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57867C0920BC25080004456A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,7 +712,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -773,7 +768,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

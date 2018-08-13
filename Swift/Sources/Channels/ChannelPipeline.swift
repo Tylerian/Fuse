@@ -279,6 +279,7 @@ fileprivate final class HeadChannelHandler: OutboundChannelHandler {
     }
     
     func channel(_ context: ChannelHandlerContext, write data: Any) throws {
+        print("Writing to underlying socket impl!")
         try context.channel.socket.write(data: data)
     }
 }

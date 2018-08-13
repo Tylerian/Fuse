@@ -486,6 +486,7 @@ extension UnsafeByteBuffer: ByteBufferWritable {
     }
     
     public func write(bytes value: [UInt8]) -> Self {
+        print("Writing bytes: \(value) -- \(value.count)")
         let result = fs_byte_buffer_write_bytes(&self.handle, UInt32(value.count), value)
         
         guard result == FS_OKAY else {

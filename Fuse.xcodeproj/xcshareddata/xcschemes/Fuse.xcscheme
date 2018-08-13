@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "0940"
-   version = "2.0">
+   version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "57867C7520BF5E340004456A"
-               BuildableName = "FuseTests.xctest"
-               BlueprintName = "FuseTests"
+               BlueprintIdentifier = "5786941020AF675E001F3DC6"
+               BuildableName = "Fuse.framework"
+               BlueprintName = "Fuse"
                ReferencedContainer = "container:Fuse.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "57867C7520BF5E340004456A"
-               BuildableName = "FuseTests.xctest"
-               BlueprintName = "FuseTests"
-               ReferencedContainer = "container:Fuse.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -51,18 +41,13 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      launchAutomaticallySubstyle = "2">
-      <PathRunnable
-         runnableDebuggingMode = "0"
-         FilePath = "/&lt;placeholder&gt;">
-      </PathRunnable>
+      allowLocationSimulation = "YES">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57867C7520BF5E340004456A"
-            BuildableName = "FuseTests.xctest"
-            BlueprintName = "FuseTests"
+            BlueprintIdentifier = "5786941020AF675E001F3DC6"
+            BuildableName = "Fuse.framework"
+            BlueprintName = "Fuse"
             ReferencedContainer = "container:Fuse.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "57867C7520BF5E340004456A"
-            BuildableName = "FuseTests.xctest"
-            BlueprintName = "FuseTests"
+            BlueprintIdentifier = "5786941020AF675E001F3DC6"
+            BuildableName = "Fuse.framework"
+            BlueprintName = "Fuse"
             ReferencedContainer = "container:Fuse.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

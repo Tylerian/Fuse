@@ -27,6 +27,9 @@ int fs_byte_buffer_init(fs_byte_buffer_t* buffer, uint32_t capacity)
         buffer->heap[i] = 0;
     }*/
     
+    /* Set capacity */
+    buffer->capacity = capacity;
+    
     /* Set marks to zero */
     buffer->reader_mark = 0;
     buffer->writer_mark = 0;
