@@ -58,7 +58,7 @@ public protocol ByteBufferWritable {
     mutating func write(bytes value: ByteBuffer) -> Self
 }
 
-internal final class UnsafeByteBuffer: ByteBuffer {
+public final class UnsafeByteBuffer: ByteBuffer {
     private var handle: fs_byte_buffer_t
     
     public  var capacity: Int {
@@ -76,7 +76,7 @@ internal final class UnsafeByteBuffer: ByteBuffer {
         }
     }
     
-    internal var unsafe: UnsafeMutablePointer<UInt8> {
+    public var unsafe: UnsafeMutablePointer<UInt8> {
         return self.handle.heap
     }
     
@@ -167,7 +167,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func getInt16(at offset: Int, endianness: Endianness = .bigEndian) -> Int16 {
+    public func getInt16(at offset: Int, endianness: Endianness) -> Int16 {
         var value = Int16()
         let result: Int32
         
@@ -185,7 +185,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func getInt32(at offset: Int, endianness: Endianness = .bigEndian) -> Int32 {
+    public func getInt32(at offset: Int, endianness: Endianness) -> Int32 {
         var value = Int32()
         let result: Int32
         
@@ -203,7 +203,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func getInt64(at offset: Int, endianness: Endianness = .bigEndian) -> Int64 {
+    public func getInt64(at offset: Int, endianness: Endianness) -> Int64 {
         var value = Int64()
         let result: Int32
         
@@ -245,7 +245,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func readInt16(endianness: Endianness = .bigEndian) -> Int16 {
+    public func readInt16(endianness: Endianness) -> Int16 {
         var value = Int16()
         let result: Int32
         
@@ -263,7 +263,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func readInt32(endianness: Endianness = .bigEndian) -> Int32 {
+    public func readInt32(endianness: Endianness) -> Int32 {
         var value = Int32()
         let result: Int32
         
@@ -281,7 +281,7 @@ extension UnsafeByteBuffer: ByteBufferReadable {
         return value
     }
     
-    public func readInt64(endianness: Endianness = .bigEndian) -> Int64 {
+    public func readInt64(endianness: Endianness) -> Int64 {
         var value = Int64()
         let result: Int32
         
